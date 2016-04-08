@@ -1,0 +1,54 @@
+{
+  "name": "ch-app",
+  "version": "0.1.0",
+  "description": "playground",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --hot --inline --progress --colors --port 8090",
+    "build": "webpack --progress --colors",
+    "test": "standard-format -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ConnectHealth/ch-app"
+  },
+  "keywords": [],
+  "author": "https://github.com/kalmanb",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ConnectHealth/ch-app/issues"
+  },
+  "homepage": "http://connecthealth.co.nz/",
+  "devDependencies": {
+    "babel-core": "^6.7.4",
+    "babel-eslint": "^6.0.2",
+    "babel-loader": "^6.2.4",
+    "babel-runtime": "^6.6.1",
+    "css-loader": "^0.23.1",
+    "eslint": "^2.7.0",
+    "eslint-loader": "^1.3.0",
+    "eslint-plugin-react": "^4.3.0",
+    "file-loader": "^0.8.5",
+    "standard-format": "^2.1.1",
+    "standard-loader": "^3.0.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.10.0",
+    "babel-preset-movio": "^1.0.2"
+  },
+  "dependencies": {
+    "classnames": "^2.2.3",
+    "material-ui": "^0.15.0-alpha.2",
+    "react": "^15.0.0",
+    "react-addons-create-fragment": "^15.0.0",
+    "react-addons-pure-render-mixin": "^15.0.0",
+    "react-addons-transition-group": "^15.0.0",
+    "react-addons-update": "^15.0.0",
+    "react-dom": "^15.0.0",
+    "react-hot-loader": "^1.3.0",
+    "react-redux": "^4.4.1",
+    "react-tap-event-plugin": "^0.2.2",
+    "redux": "^3.3.1"
+  }
+}
