@@ -1,7 +1,7 @@
 {
-  "name": "ch-app",
+  "name": "movio-todomvc",
   "version": "0.1.0",
-  "description": "playground",
+  "description": "Movio's TodoMVC stack",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot --inline --progress --colors --port 8090",
@@ -10,15 +10,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ConnectHealth/ch-app"
+    "url": "https://github.com/movio/movio-todomvc"
   },
-  "keywords": [],
-  "author": "https://github.com/kalmanb",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/ConnectHealth/ch-app/issues"
-  },
-  "homepage": "http://connecthealth.co.nz/",
+  "keywords": ["movio", "todomvc"],
+  "contributors": [
+    {
+      "name": "Kalman Bekesi",
+      "url": "https://github.com/kalmanb"
+    },
+    {
+      "name": "Raghuvir Kasturi",
+      "url": "https://github.com/d4ncer"
+    }
+  ],
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.7.4",
     "babel-eslint": "^6.0.2",
