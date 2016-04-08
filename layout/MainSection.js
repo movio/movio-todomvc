@@ -44,7 +44,7 @@ class MainSection extends Component {
         style={{marginBottom: 10}}
         label="Toggle All"
         defaultChecked={completedCount === todosData.length}
-        onCheck={actions.completeAll} />
+        onCheck={actions.toggleAll} />
       )
     }
   }
@@ -54,7 +54,7 @@ class MainSection extends Component {
     const { filter } = this.state
     const activeCount = todosData.length - completedCount
 
-    if (todosData.length) {
+    if (todosData.size) {
       return (
       <Footer
         completedCount={completedCount}
@@ -79,7 +79,7 @@ class MainSection extends Component {
     <section className="main" style={defaultStyle}>
       {this.renderToggleAll(completedCount)}
       <List className="todo-list">
-        {filteredTodos.map(todo => <TodoItem key={todo.id} todo={todo} {...actions} />
+        {filteredTodos.map((todo, id) => <TodoItem key={id} todo={todo} todoId={id} {...actions} />
          )}
       </List>
       {this.renderFooter(completedCount)}

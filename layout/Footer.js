@@ -46,6 +46,7 @@ class Footer extends Component {
       style={{color: active ? palette.primary1Color : palette.textColor}}
       primaryText={title + (count > 0 ? ' (' + count + ')' : '')}
       leftIcon={FILTER_ICONS[filter]}
+      onClick={onTouchTap}
       onTouchTap={onTouchTap} />
     )
   }

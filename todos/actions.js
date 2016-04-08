@@ -16,8 +16,8 @@ export function complete (id) {
   return { type: t.COMPLETE, id}
 }
 
-export function completeAll () {
-  return { type: t.COMPLETE_ALL }
+export function toggleAll () {
+  return { type: t.TOGGLE_ALL }
 }
 
 export function clearCompleted () {

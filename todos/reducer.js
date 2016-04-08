@@ -1,44 +1,39 @@
 import * as t from './actionTypes'
+import * as I from 'immutable'
 
-const initialState = [{
+const uuid = () => Math.floor(Math.random() * 100000)
+
+const todoMap = I.OrderedMap()
+
+const initialState = todoMap.set(uuid(), {
   text: 'Use Redux',
-  completed: false,
-  id: 0
-}]
+  completed: false
+})
 
 export default function todos (state = initialState , action) {
   switch (action.type) {
     case t.ADD:
-      return [{
-        id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-        completed: false,
-        text: action.text
-      }, ...state]
+      return state.set(uuid(), {
+        text: action.text,
+        completed: false
+      })
 
     case t.DELETE:
-      return state.filter(todo => todo.id !== action.id
-      )
+      return state.delete(action.id)
 
     case t.EDIT:
-      return state.map(todo => todo.id === action.id ?
-        Object.assign({}, todo, { text: action.text }) :
-        todo
-      )
+      const todoToEdit = state.get(action.id)
+      return state.set(action.id, { ...todoToEdit, text: action.text })
 
     case t.COMPLETE:
-      return state.map(todo => todo.id === action.id ?
-        Object.assign({}, todo, { completed: !todo.completed }) :
-        todo
-      )
+      const todoToComplete = state.get(action.id)
+      return state.set(action.id, { ...todoToComplete, completed: !todoToComplete.completed })
 
-    case t.COMPLETE_ALL:
-      const areAllMarked = state.every(todo => todo.completed)
-      return state.map(todo => Object.assign({}, todo, {
-        completed: !areAllMarked
-      }))
+    case t.TOGGLE_ALL:
+      return state.map(r => { return { ...r, completed: !r.completed } })
 
     case t.CLEAR_COMPLETED:
-      return state.filter(todo => todo.completed === false)
+      return state.filter(r => r.completed === false)
 
     default:
       return state
