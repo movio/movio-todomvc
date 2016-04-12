@@ -37,13 +37,13 @@ class MainSection extends Component {
 
   renderToggleAll (completedCount) {
     const { todosData, actions } = this.props
-    if (todosData.length > 0) {
+    if (todosData.size > 0) {
       return (
         <Checkbox
           className='toggle-all'
           style={{marginBottom: 10}}
           label='Toggle All'
-          defaultChecked={completedCount === todosData.length}
+          defaultChecked={completedCount === todosData.size}
           onCheck={actions.toggleAll} />
       )
     }
@@ -52,7 +52,7 @@ class MainSection extends Component {
   renderFooter (completedCount) {
     const { todosData } = this.props
     const { filter } = this.state
-    const activeCount = todosData.length - completedCount
+    const activeCount = todosData.size - completedCount
 
     if (todosData.size) {
       return (

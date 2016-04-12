@@ -46,7 +46,7 @@ class TodoTextInput extends Component {
         value={this.state.text}
         onBlur={this.handleBlur.bind(this)}
         onChange={this.handleChange.bind(this)}
-        onEnterKeyDown={this.handleEnter.bind(this)} />
+        onKeyDown={this.handleEnter.bind(this)} />
     )
   }
 }
