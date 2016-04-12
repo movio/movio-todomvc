@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 
-import mui, { AppBar, Styles } from 'material-ui'
+import { AppBar, Styles } from 'material-ui'
 import MyRawTheme from '../src/material_ui_raw_theme_file'
 
 import todos from '../todos'
@@ -16,7 +16,7 @@ class Header extends Component {
   }
 
   getChildContext () {
-    return {  muiTheme: Styles.ThemeManager.getMuiTheme(MyRawTheme)}
+    return { muiTheme: Styles.getMuiTheme(MyRawTheme) }
   }
 
   handleSave (text) {
@@ -27,11 +27,11 @@ class Header extends Component {
 
   render () {
     return (
-    <header className="header">
-      <AppBar title="React + Redux + Material UI Boilerplate" />
-      <h1 style={defaultStyle}>todos</h1>
-      <TodoTextInput newTodo onSave={this.handleSave.bind(this)} placeholder="What needs to be done?" />
-    </header>
+      <header className='header'>
+        <AppBar title='Movio TODO MVC' />
+        <h1 style={defaultStyle}>todos</h1>
+        <TodoTextInput newTodo onSave={this.handleSave.bind(this)} placeholder='What needs to be done?' />
+      </header>
     )
   }
 }

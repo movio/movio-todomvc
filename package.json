@@ -4,7 +4,7 @@
   "description": "Movio's TodoMVC stack",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --progress --colors --port 8090",
+    "start": "webpack-dev-server --hot --inline --progress --colors",
     "build": "webpack --progress --colors",
     "test": "standard-format -w"
   },

@@ -1,19 +1,19 @@
-import * as t from './actionTypes'
+import { actionTypes as t } from './constants'
 
 export function add (text) {
-  return { type: t.ADD, text}
+  return { type: t.ADD, text }
 }
 
 export function deleteTodo (id) {
-  return { type: t.DELETE, id}
+  return { type: t.DELETE, id }
 }
 
 export function edit (id, text) {
-  return { type: t.EDIT, id, text}
+  return { type: t.EDIT, id, text }
 }
 
 export function complete (id) {
-  return { type: t.COMPLETE, id}
+  return { type: t.COMPLETE, id }
 }
 
 export function toggleAll () {

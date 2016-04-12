@@ -31,16 +31,16 @@ class TodoItem extends Component {
   }
 
   render () {
-    const { todo, complete, deleteTodo, todoId} = this.props
+    const { todo, complete, deleteTodo, todoId } = this.props
 
     const deleteFn = () => deleteTodo(todoId)
     const rightIconMenu = (
-    <IconMenu iconButtonElement={<IconButton>
-                               <MoreVertIcon color={Styles.Colors.grey400} />
-                             </IconButton>}>
-      <MenuItem primaryText='Edit' onTouchTap={this.handleEdit.bind(this)} />
-      <MenuItem primaryText='Delete' onTouchTap={deleteFn} />
-    </IconMenu>
+      <IconMenu iconButtonElement={<IconButton>
+        <MoreVertIcon color={Styles.Colors.grey400} />
+      </IconButton>}>
+        <MenuItem primaryText='Edit' onTouchTap={this.handleEdit.bind(this)} />
+        <MenuItem primaryText='Delete' onTouchTap={deleteFn} />
+      </IconMenu>
     )
 
     const onSave = (text) => this.handleSave(todoId, text)
@@ -63,9 +63,9 @@ class TodoItem extends Component {
 
     return (
       <div className={classnames({
-          completed: todo.completed,
-          editing: this.state.editing
-        })}>
+        completed: todo.completed,
+        editing: this.state.editing
+      })}>
         {element}
       </div>
     )

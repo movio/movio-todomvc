@@ -11,7 +11,7 @@ import MyRawTheme from '../src/material_ui_raw_theme_file'
 import todos from '../todos'
 const { filters } = todos
 
-const palette = Styles.ThemeManager.getMuiTheme(MyRawTheme).baseTheme.palette
+const palette = Styles.getMuiTheme(MyRawTheme).baseTheme.palette
 
 const FILTER_TITLES = {
   [filters.SHOW_ALL]: 'All',
@@ -40,14 +40,14 @@ class Footer extends Component {
     const count = this.getCountForFilter(filter)
     const onTouchTap = () => onShow(filter)
     return (
-    <ListItem
-      key={filter}
-      className={classnames({ selected: active })}
-      style={{color: active ? palette.primary1Color : palette.textColor}}
-      primaryText={title + (count > 0 ? ' (' + count + ')' : '')}
-      leftIcon={FILTER_ICONS[filter]}
-      onClick={onTouchTap}
-      onTouchTap={onTouchTap} />
+      <ListItem
+        key={filter}
+        className={classnames({ selected: active })}
+        style={{color: active ? palette.primary1Color : palette.textColor}}
+        primaryText={title + (count > 0 ? ' (' + count + ')' : '')}
+        leftIcon={FILTER_ICONS[filter]}
+        onClick={onTouchTap}
+        onTouchTap={onTouchTap} />
     )
   }
 
@@ -55,11 +55,11 @@ class Footer extends Component {
     const { completedCount, onClearCompleted } = this.props
     if (completedCount > 0) {
       return (
-      <RaisedButton
-        className='clear-completed'
-        primary
-        label='Clear completed'
-        onClick={onClearCompleted} />
+        <RaisedButton
+          className='clear-completed'
+          primary
+          label='Clear completed'
+          onClick={onClearCompleted} />
       )
     }
   }
@@ -67,13 +67,13 @@ class Footer extends Component {
   render () {
     const filterFn = [filters.SHOW_ALL, filters.SHOW_ACTIVE, filters.SHOW_COMPLETED].map((filter) => this.renderFilterLink(filter))
     return (
-    <footer className='footer'>
-      <Divider style={{marginTop: 10}} />
-      <List className='filters'>
-        {filterFn}
-      </List>
-      {this.renderClearButton()}
-    </footer>
+      <footer className='footer'>
+        <Divider style={{marginTop: 10}} />
+        <List className='filters'>
+          {filterFn}
+        </List>
+        {this.renderClearButton()}
+      </footer>
     )
   }
 }

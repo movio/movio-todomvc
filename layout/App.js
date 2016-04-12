@@ -10,16 +10,16 @@ class App extends Component {
   render () {
     const { todosData, actions } = this.props
     return (
-    <div>
-      <Header add={actions.add} />
-      <MainSection todosData={todosData} actions={actions} />
-    </div>
+      <div>
+        <Header add={actions.add} />
+        <MainSection todosData={todosData} actions={actions} />
+      </div>
     )
   }
 }
 
 App.propTypes = {
-  todosData: PropTypes.array.isRequired,
+  todosData: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 }
 

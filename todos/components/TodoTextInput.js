@@ -34,19 +34,19 @@ class TodoTextInput extends Component {
 
   render () {
     return (
-    <TextField
-      className={classnames({
-                   edit: this.props.editing,
-                   'new-todo': this.props.newTodo
-                 })}
-      style={defaultStyle}
-      type="text"
-      hintText={this.props.placeholder}
-      autoFocus="true"
-      value={this.state.text}
-      onBlur={this.handleBlur.bind(this)}
-      onChange={this.handleChange.bind(this)}
-      onEnterKeyDown={this.handleEnter.bind(this)} />
+      <TextField
+        className={classnames({
+          edit: this.props.editing,
+          'new-todo': this.props.newTodo
+        })}
+        style={defaultStyle}
+        type='text'
+        hintText={this.props.placeholder}
+        autoFocus='true'
+        value={this.state.text}
+        onBlur={this.handleBlur.bind(this)}
+        onChange={this.handleChange.bind(this)}
+        onEnterKeyDown={this.handleEnter.bind(this)} />
     )
   }
 }
