@@ -1,4 +1,4 @@
-import * as t from './actionTypes'
+import * as t from './constants'
 import * as I from 'immutable'
 
 const uuid = () => Math.floor(Math.random() * 100000)
@@ -10,7 +10,7 @@ const initialState = todoMap.set(uuid(), {
   completed: false
 })
 
-export default function todos (state = initialState , action) {
+export default function todos (state = initialState, action) {
   switch (action.type) {
     case t.ADD:
       return state.set(uuid(), {
@@ -30,10 +30,10 @@ export default function todos (state = initialState , action) {
       return state.set(action.id, { ...todoToComplete, completed: !todoToComplete.completed })
 
     case t.TOGGLE_ALL:
-      return state.map(r => { return { ...r, completed: !r.completed } })
+      return state.map((r) => { return { ...r, completed: !r.completed } })
 
     case t.CLEAR_COMPLETED:
-      return state.filter(r => r.completed === false)
+      return state.filter((r) => r.completed === false)
 
     default:
       return state

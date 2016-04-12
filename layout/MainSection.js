@@ -5,7 +5,7 @@ import { Checkbox, List } from 'material-ui'
 import Footer from './Footer'
 
 import todos from '../todos'
-const { filters, TodoItem } = todos
+const { constants, TodoItem } = todos
 
 const defaultStyle = {
   width: 300,
@@ -13,38 +13,38 @@ const defaultStyle = {
 }
 
 const TODO_FILTERS = {
-  [filters.SHOW_ALL]: () => true,
-  [filters.SHOW_ACTIVE]: todo => !todo.completed,
-  [filters.SHOW_COMPLETED]: todo => todo.completed
+  [constants.SHOW_ALL]: () => true,
+  [constants.SHOW_ACTIVE]: (todo) => !todo.completed,
+  [constants.SHOW_COMPLETED]: (todo) => todo.completed
 }
 
 class MainSection extends Component {
   constructor (props, context) {
     super(props, context)
-    this.state = { filter: filters.SHOW_ALL }
+    this.state = { filter: constants.SHOW_ALL }
   }
 
   handleClearCompleted () {
-    const atLeastOneCompleted = this.props.todosData.some(todo => todo.completed)
+    const atLeastOneCompleted = this.props.todosData.some((todo) => todo.completed)
     if (atLeastOneCompleted) {
       this.props.actions.clearCompleted()
     }
   }
 
   handleShow (filter) {
-    this.setState({ filter})
+    this.setState({filter})
   }
 
   renderToggleAll (completedCount) {
     const { todosData, actions } = this.props
     if (todosData.length > 0) {
       return (
-      <Checkbox
-        className="toggle-all"
-        style={{marginBottom: 10}}
-        label="Toggle All"
-        defaultChecked={completedCount === todosData.length}
-        onCheck={actions.toggleAll} />
+        <Checkbox
+          className='toggle-all'
+          style={{marginBottom: 10}}
+          label='Toggle All'
+          defaultChecked={completedCount === todosData.length}
+          onCheck={actions.toggleAll} />
       )
     }
   }
@@ -56,12 +56,12 @@ class MainSection extends Component {
 
     if (todosData.size) {
       return (
-      <Footer
-        completedCount={completedCount}
-        activeCount={activeCount}
-        filter={filter}
-        onClearCompleted={this.handleClearCompleted.bind(this)}
-        onShow={this.handleShow.bind(this)} />
+        <Footer
+          completedCount={completedCount}
+          activeCount={activeCount}
+          filter={filter}
+          onClearCompleted={this.handleClearCompleted.bind(this)}
+          onShow={this.handleShow.bind(this)} />
       )
     }
   }
@@ -76,14 +76,14 @@ class MainSection extends Component {
     )
 
     return (
-    <section className="main" style={defaultStyle}>
-      {this.renderToggleAll(completedCount)}
-      <List className="todo-list">
-        {filteredTodos.map((todo, id) => <TodoItem key={id} todo={todo} todoId={id} {...actions} />
-         )}
-      </List>
-      {this.renderFooter(completedCount)}
-    </section>
+      <section className='main' style={defaultStyle}>
+        {this.renderToggleAll(completedCount)}
+        <List className='todo-list'>
+          {filteredTodos.map((todo, id) => <TodoItem key={id} todo={todo} todoId={id} {...actions} />
+           )}
+        </List>
+        {this.renderFooter(completedCount)}
+      </section>
     )
   }
 }
