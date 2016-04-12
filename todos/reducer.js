@@ -5,6 +5,7 @@ const uuid = () => Math.floor(Math.random() * 100000)
 
 const todoMap = I.OrderedMap()
 
+// FIXME - get from sagas
 const initialState = todoMap.set(uuid(), {
   text: 'Use Redux',
   completed: false

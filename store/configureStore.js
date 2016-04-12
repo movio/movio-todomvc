@@ -1,8 +1,9 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import rootReducer from '../layout/rootReducer'
+import rootSaga from '../layout/rootSaga'
 
-export default function configureStore (initialState) {
-  const store = createStore(rootReducer, initialState,
+export default function configureStore () {
+  const store = createStore(rootReducer, applyMiddleware(rootSaga),
     window.devToolsExtension ? window.devToolsExtension() : undefined
   )
 
