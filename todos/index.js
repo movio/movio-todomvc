@@ -1,5 +1,5 @@
+import { NAME, actionTypes, filters } from './constants'
 import * as actions from './actions'
-import * as constants from './constants'
 import reducer from './reducer'
 import sagas from './sagas'
 
@@ -9,8 +9,10 @@ import TodoItem from './components/TodoItem.js'
 import TodoTextInput from './components/TodoTextInput.js'
 
 export default {
+  NAME,
+  actionTypes,
+  filters,
   actions,
-  constants,
   reducer,
   sagas,
   TodoItem,
