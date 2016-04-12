@@ -5,6 +5,8 @@ module.exports = {
     css: './main.css',
     html: './index.html',
   },
+  debug: true,
+  devtool: 'source-map',
 
   output: {
     path: __dirname + '/static',
