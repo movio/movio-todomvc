@@ -11,7 +11,7 @@ import MyRawTheme from '../src/material_ui_raw_theme_file'
 import todos from '../todos'
 const { constants } = todos
 
-const palette = Styles.ThemeManager.getMuiTheme(MyRawTheme).baseTheme.palette
+const palette = Styles.getMuiTheme(MyRawTheme).baseTheme.palette
 
 const FILTER_TITLES = {
   [constants.SHOW_ALL]: 'All',

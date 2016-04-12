@@ -16,7 +16,7 @@ class Header extends Component {
   }
 
   getChildContext () {
-    return { muiTheme: Styles.ThemeManager.getMuiTheme(MyRawTheme) }
+    return { muiTheme: Styles.getMuiTheme(MyRawTheme) }
   }
 
   handleSave (text) {
