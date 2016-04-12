@@ -19,7 +19,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  todosData: PropTypes.array.isRequired,
+  todosData: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 }
 

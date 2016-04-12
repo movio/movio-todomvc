@@ -89,7 +89,7 @@ class MainSection extends Component {
 }
 
 MainSection.propTypes = {
-  todosData: PropTypes.array.isRequired,
+  todosData: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 }
 
