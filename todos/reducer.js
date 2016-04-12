@@ -1,4 +1,4 @@
-import * as t from './constants'
+import { actionTypes as t } from './constants'
 import * as I from 'immutable'
 
 const uuid = () => Math.floor(Math.random() * 100000)

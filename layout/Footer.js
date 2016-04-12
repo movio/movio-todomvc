@@ -9,28 +9,28 @@ import ArchiveIcon from 'material-ui/lib/svg-icons/content/archive'
 import MyRawTheme from '../src/material_ui_raw_theme_file'
 
 import todos from '../todos'
-const { constants } = todos
+const { filters } = todos
 
 const palette = Styles.getMuiTheme(MyRawTheme).baseTheme.palette
 
 const FILTER_TITLES = {
-  [constants.SHOW_ALL]: 'All',
-  [constants.SHOW_ACTIVE]: 'Active',
-  [constants.SHOW_COMPLETED]: 'Completed'
+  [filters.SHOW_ALL]: 'All',
+  [filters.SHOW_ACTIVE]: 'Active',
+  [filters.SHOW_COMPLETED]: 'Completed'
 }
 
 const FILTER_ICONS = {
-  [constants.SHOW_ALL]: <InboxIcon />,
-  [constants.SHOW_ACTIVE]: <LoopIcon />,
-  [constants.SHOW_COMPLETED]: <ArchiveIcon />
+  [filters.SHOW_ALL]: <InboxIcon />,
+  [filters.SHOW_ACTIVE]: <LoopIcon />,
+  [filters.SHOW_COMPLETED]: <ArchiveIcon />
 }
 
 class Footer extends Component {
   getCountForFilter (filter) {
     const { activeCount, completedCount } = this.props
-    if (filter === constants.SHOW_ALL) return activeCount + completedCount
-    if (filter === constants.SHOW_ACTIVE) return activeCount
-    if (filter === constants.SHOW_COMPLETED) return completedCount
+    if (filter === filters.SHOW_ALL) return activeCount + completedCount
+    if (filter === filters.SHOW_ACTIVE) return activeCount
+    if (filter === filters.SHOW_COMPLETED) return completedCount
   }
 
   renderFilterLink (filter) {
@@ -65,11 +65,11 @@ class Footer extends Component {
   }
 
   render () {
-    const filterFn = [constants.SHOW_ALL, constants.SHOW_ACTIVE, constants.SHOW_COMPLETED].map((filter) => this.renderFilterLink(filter))
+    const filterFn = [filters.SHOW_ALL, filters.SHOW_ACTIVE, filters.SHOW_COMPLETED].map((filter) => this.renderFilterLink(filter))
     return (
       <footer className='footer'>
         <Divider style={{marginTop: 10}} />
-        <List className='constants'>
+        <List className='filters'>
           {filterFn}
         </List>
         {this.renderClearButton()}

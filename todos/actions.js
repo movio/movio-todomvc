@@ -1,4 +1,4 @@
-import * as t from './constants'
+import { actionTypes as t } from './constants'
 
 export function add (text) {
   return { type: t.ADD, text }

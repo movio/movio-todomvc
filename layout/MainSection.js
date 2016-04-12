@@ -5,7 +5,7 @@ import { Checkbox, List } from 'material-ui'
 import Footer from './Footer'
 
 import todos from '../todos'
-const { constants, TodoItem } = todos
+const { filters, TodoItem } = todos
 
 const defaultStyle = {
   width: 300,
@@ -13,15 +13,15 @@ const defaultStyle = {
 }
 
 const TODO_FILTERS = {
-  [constants.SHOW_ALL]: () => true,
-  [constants.SHOW_ACTIVE]: (todo) => !todo.completed,
-  [constants.SHOW_COMPLETED]: (todo) => todo.completed
+  [filters.SHOW_ALL]: () => true,
+  [filters.SHOW_ACTIVE]: (todo) => !todo.completed,
+  [filters.SHOW_COMPLETED]: (todo) => todo.completed
 }
 
 class MainSection extends Component {
   constructor (props, context) {
     super(props, context)
-    this.state = { filter: constants.SHOW_ALL }
+    this.state = { filter: filters.SHOW_ALL }
   }
 
   handleClearCompleted () {

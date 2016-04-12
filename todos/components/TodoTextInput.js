@@ -39,14 +39,14 @@ class TodoTextInput extends Component {
           edit: this.props.editing,
           'new-todo': this.props.newTodo
         })}
-        syle={defaultStyle}
-        tpe='text'
+        style={defaultStyle}
+        type='text'
         hintText={this.props.placeholder}
         autoFocus='true'
         value={this.state.text}
         onBlur={this.handleBlur.bind(this)}
         onChange={this.handleChange.bind(this)}
-        onKeyDown={this.handleEnter.bind(this)} />
+        onEnterKeyDown={this.handleEnter.bind(this)} />
     )
   }
 }
