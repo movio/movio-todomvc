@@ -7,6 +7,10 @@ import MainSection from './MainSection'
 import todos from '../todos'
 
 class App extends Component {
+  componentDidMount() {
+    this.props.actions.fetch()
+  }
+
   render () {
     const { todosData, actions } = this.props
     return (

@@ -23,3 +23,7 @@ export function toggleAll () {
 export function clearCompleted () {
   return { type: t.CLEAR_COMPLETED }
 }
+
+export function fetch () {
+  return { type: t.FETCH }
+}
