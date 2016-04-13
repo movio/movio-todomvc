@@ -9,10 +9,10 @@ const allSagas = [].concat(
   // others ...
 )
 
-function * startSagas() {
-  yield allSagas.map(_ => fork(_))
+function * startSagas () {
+  yield allSagas.map((_) => fork(_))
 }
 
-const middleWare = createSagaMiddleware(startSagas)
-export default middleWare
+const sagaMiddleware = createSagaMiddleware(startSagas)
+export default sagaMiddleware
 

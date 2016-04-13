@@ -2,10 +2,9 @@ import { takeEvery } from 'redux-saga'
 import { call, put } from 'redux-saga/effects'
 import * as request from 'superagent'
 
-import { Map } from 'immutable'
 import { actionTypes as actions } from './constants'
 
-function * getTodos () {
+function * getTodos (action) {
   try {
     yield put({ type: actions.FETCHING })
     const { todos } = yield call(getRequest)
@@ -16,12 +15,13 @@ function * getTodos () {
 }
 
 // Fetch todos whenever receive a FETCH action
-function * watchTodos() {
+function * watchTodos () {
+  console.log(actions.FETCH)
+
   yield * takeEvery(actions.FETCH, getTodos)
 }
 
-const getRequest = () => new Promise((resolve, _) => {
-
+const getRequest = () => new Promise((resolve, reject) => {
   const response = {
     todos: [
       {
