@@ -1,20 +1,18 @@
 import createSagaMiddleware from 'redux-saga'
-import { fork } from 'redux-saga'
+import { fork } from 'redux-saga/effects'
 
 import todos from '../todos'
 const { sagas } = todos
 
-const allSagas = [
+const allSagas = [].concat(
   sagas
   // others ...
-]
+)
 
-function startSagas (...sagas) {
-  return function * rootSaga () {
-    yield sagas.map((saga) => fork(saga))
-  }
+function * startSagas() {
+  yield allSagas.map(_ => fork(_))
 }
 
-const middleWare = createSagaMiddleware(startSagas(...allSagas))
+const middleWare = createSagaMiddleware(startSagas)
 export default middleWare
 
