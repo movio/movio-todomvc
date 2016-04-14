@@ -21,6 +21,7 @@ function * watchTodos () {
   yield * takeEvery(actions.FETCH, getTodos)
 }
 
+// TODO - move this to api.js
 const getRequest = () => new Promise((resolve, reject) => {
   const response = {
     todos: [
