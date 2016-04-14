@@ -1,6 +1,8 @@
 import { NAME, actionTypes, filters } from './constants'
 import * as actions from './actions'
 import reducer from './reducer'
+import sagas from './sagas'
+
 // re-select
 // import * as selectors from './selectors'
 import TodoItem from './components/TodoItem.js'
@@ -12,6 +14,7 @@ export default {
   filters,
   actions,
   reducer,
+  sagas,
   TodoItem,
   TodoTextInput
 }

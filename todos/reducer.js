@@ -5,10 +5,11 @@ const uuid = () => Math.floor(Math.random() * 100000)
 
 const todoMap = I.OrderedMap()
 
-const initialState = todoMap.set(uuid(), {
-  text: 'Use Redux',
-  completed: false
-})
+// FIXME - get from sagas
+// Please consider carefully, is it necessary to have the whole
+// state object in immutable collection, especially if you will
+// use reselect in the future.
+const initialState = todoMap
 
 export default function todos (state = initialState, action) {
   switch (action.type) {
@@ -34,6 +35,16 @@ export default function todos (state = initialState, action) {
 
     case t.CLEAR_COMPLETED:
       return state.filter((r) => r.completed === false)
+
+    case t.FETCH_SUCCESS:
+      return action.todos.reduce(
+        (newState, next) => newState.set(uuid(), next),
+        initialState
+      )
+
+    case t.FETCH_ERROR:
+      console.error('Failed to fetch TODOs.')
+      return initialState
 
     default:
       return state

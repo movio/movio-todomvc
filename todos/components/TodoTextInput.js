@@ -15,10 +15,12 @@ class TodoTextInput extends Component {
   }
 
   handleEnter (e) {
-    const text = e.target.value.trim()
-    this.props.onSave(text)
-    if (this.props.newTodo) {
-      this.setState({ text: '' })
+    if (e.keyCode === 13) { // on enter
+      const text = e.target.value.trim()
+      this.props.onSave(text)
+      if (this.props.newTodo) {
+        this.setState({ text: '' })
+      }
     }
   }
 
@@ -46,7 +48,7 @@ class TodoTextInput extends Component {
         value={this.state.text}
         onBlur={this.handleBlur.bind(this)}
         onChange={this.handleChange.bind(this)}
-        onEnterKeyDown={this.handleEnter.bind(this)} />
+        onKeyDown={this.handleEnter.bind(this)} />
     )
   }
 }
