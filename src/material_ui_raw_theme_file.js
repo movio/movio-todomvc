@@ -1,21 +1,20 @@
-import * as Colors from 'material-ui/lib/styles/colors'
-import ColorManipulator from 'material-ui/lib/utils/color-manipulator'
-import Spacing from 'material-ui/lib/styles/spacing'
+import { spacing, colors } from 'material-ui/styles'
+import * as ColorManipulator from 'material-ui/utils/colorManipulator'
 
 module.exports = {
-  spacing: Spacing,
+  spacing: spacing,
   fontFamily: 'Roboto, sans-serif',
   palette: {
-    primary1Color: Colors.cyan500,
-    primary2Color: Colors.cyan700,
-    primary3Color: Colors.lightBlack,
-    accent1Color: Colors.pinkA200,
-    accent2Color: Colors.grey100,
-    accent3Color: Colors.grey500,
-    textColor: Colors.darkBlack,
-    alternateTextColor: Colors.white,
-    canvasColor: Colors.white,
-    borderColor: Colors.grey300,
-    disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3)
+    primary1Color: colors.cyan500,
+    primary2Color: colors.cyan700,
+    primary3Color: colors.lightBlack,
+    accent1Color: colors.pinkA200,
+    accent2Color: colors.grey100,
+    accent3Color: colors.grey500,
+    textColor: colors.darkBlack,
+    alternateTextColor: colors.white,
+    canvasColor: colors.white,
+    borderColor: colors.grey300,
+    disabledColor: ColorManipulator.fade(colors.darkBlack, 0.3)
   }
 }

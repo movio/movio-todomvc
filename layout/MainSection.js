@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 
 import { Checkbox, List } from 'material-ui'
+import { getMuiTheme } from 'material-ui/styles';
+import MyRawTheme from '../src/material_ui_raw_theme_file'
 
 import Footer from './Footer'
-
 import todos from '../todos'
 const { filters, TodoItem } = todos
 
@@ -19,6 +20,14 @@ const TODO_FILTERS = {
 }
 
 class MainSection extends Component {
+  static get childContextTypes () {
+    return { muiTheme: React.PropTypes.object }
+  }
+
+  getChildContext () {
+    return { muiTheme: getMuiTheme(MyRawTheme) }
+  }
+
   constructor (props, context) {
     super(props, context)
     this.state = { filter: filters.SHOW_ALL }

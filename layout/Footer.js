@@ -1,17 +1,18 @@
 import React, { PropTypes, Component } from 'react'
 import classnames from 'classnames'
-import { RaisedButton, List, ListItem, Divider, Styles } from 'material-ui'
+import { RaisedButton, List, ListItem, Divider } from 'material-ui'
+import { getMuiTheme } from 'material-ui/styles';
 
-import InboxIcon from 'material-ui/lib/svg-icons/content/inbox'
-import LoopIcon from 'material-ui/lib/svg-icons/av/loop'
-import ArchiveIcon from 'material-ui/lib/svg-icons/content/archive'
+import InboxIcon from 'material-ui/svg-icons/content/inbox'
+import LoopIcon from 'material-ui/svg-icons/av/loop'
+import ArchiveIcon from 'material-ui/svg-icons/content/archive'
 
 import MyRawTheme from '../src/material_ui_raw_theme_file'
 
 import todos from '../todos'
 const { filters } = todos
 
-const palette = Styles.getMuiTheme(MyRawTheme).baseTheme.palette
+const palette = getMuiTheme(MyRawTheme).baseTheme.palette
 
 const FILTER_TITLES = {
   [filters.SHOW_ALL]: 'All',
