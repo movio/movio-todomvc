@@ -6,7 +6,9 @@
   "scripts": {
     "start": "webpack-dev-server --hot --inline --progress --colors",
     "build": "webpack --progress --colors",
-    "test": "standard-format -w"
+    "test": "standard-format -w",
+    "lint": "eslint",
+    "format": "eslint"
   },
   "repository": {
     "type": "git",
@@ -31,20 +33,14 @@
     "babel-core": "^6.7.6",
     "babel-eslint": "^6.0.2",
     "babel-loader": "^6.2.4",
-    "babel-runtime": "^6.6.1",
     "babel-polyfill": "^6.7.4",
+    "babel-preset-movio": "^1.0.2",
+    "babel-runtime": "^6.6.1",
     "css-loader": "^0.23.1",
-    "eslint": "^2.7.0",
-    "eslint-loader": "^1.3.0",
-    "eslint-plugin-react": "^4.3.0",
     "file-loader": "^0.8.5",
-    "standard-format": "^2.1.1",
-    "standard-loader": "^3.0.0",
-    "style-loader": "^0.13.1",
     "webpack": "^1.12.15",
     "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.10.0",
-    "babel-preset-movio": "^1.0.2"
+    "webpack-hot-middleware": "^2.10.0"
   },
   "dependencies": {
     "classnames": "^2.2.3",

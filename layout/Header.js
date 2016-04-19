@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react'
 
-import { AppBar, Styles } from 'material-ui'
+import { AppBar } from 'material-ui'
+import { getMuiTheme } from 'material-ui/styles';
+
 import MyRawTheme from '../src/material_ui_raw_theme_file'
 
 import todos from '../todos'
@@ -16,7 +18,7 @@ class Header extends Component {
   }
 
   getChildContext () {
-    return { muiTheme: Styles.getMuiTheme(MyRawTheme) }
+    return { muiTheme: getMuiTheme(MyRawTheme) }
   }
 
   handleSave (text) {
