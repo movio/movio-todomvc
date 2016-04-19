@@ -1,4 +1,4 @@
-export const NAME = 'todos'
+export const NAME = 'todos';
 
 export const actionTypes = {
   ADD: 'todos/ADD',
@@ -10,11 +10,11 @@ export const actionTypes = {
   FETCH: 'todos/FETCH',
   FETCHING: 'todos/FETCHING',
   FETCH_SUCCESS: 'todos/FETCH_SUCCESS',
-  FETCH_ERROR: 'todos/FETCH_ERROR'
-}
+  FETCH_ERROR: 'todos/FETCH_ERROR',
+};
 
 export const filters = {
   SHOW_ALL: 'show_all',
   SHOW_COMPLETED: 'show_completed',
-  SHOW_ACTIVE: 'show_active'
-}
+  SHOW_ACTIVE: 'show_active',
+};
