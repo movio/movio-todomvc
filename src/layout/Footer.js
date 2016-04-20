@@ -32,6 +32,7 @@ class Footer extends Component {
     if (filter === filters.SHOW_ALL) return activeCount + completedCount;
     if (filter === filters.SHOW_ACTIVE) return activeCount;
     if (filter === filters.SHOW_COMPLETED) return completedCount;
+    throw new Error('Invalid filter provided');
   }
 
   renderFilterLink(filter) {
@@ -40,12 +41,13 @@ class Footer extends Component {
     const active = filter === selectedFilter;
     const count = this.getCountForFilter(filter);
     const onTouchTap = () => onShow(filter);
+    const getCountString = (countValue) => countValue > 0 ? `(${countValue})` : '';
     return (
       <ListItem
         key={filter}
         className={classnames({ selected: active })}
         style={{ color: active ? palette.primary1Color : palette.textColor }}
-        primaryText={title + (count > 0 ? ' (' + count + ')' : '')}
+        primaryText={`${title} ${getCountString(count)}`}
         leftIcon={FILTER_ICONS[filter]}
         onClick={onTouchTap}
         onTouchTap={onTouchTap}
@@ -65,10 +67,12 @@ class Footer extends Component {
         />
       );
     }
+    return null;
   }
 
   render() {
-    const filterFn = [filters.SHOW_ALL, filters.SHOW_ACTIVE, filters.SHOW_COMPLETED].map((filter) => this.renderFilterLink(filter));
+    const filterFn = [filters.SHOW_ALL, filters.SHOW_ACTIVE, filters.SHOW_COMPLETED]
+      .map((filter) => this.renderFilterLink(filter));
     return (
       <footer className="footer">
         <Divider style={{ marginTop: 10 }} />

@@ -27,6 +27,8 @@ class MainSection extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = { filter: filters.SHOW_ALL };
+    this.handleClearCompleted = this.handleClearCompleted.bind(this);
+    this.handleShow = this.handleShow.bind(this);
   }
 
   getChildContext() {
@@ -57,6 +59,7 @@ class MainSection extends Component {
         />
       );
     }
+    return null;
   }
 
   renderFooter(completedCount) {
@@ -70,11 +73,12 @@ class MainSection extends Component {
           completedCount={completedCount}
           activeCount={activeCount}
           filter={filter}
-          onClearCompleted={this.handleClearCompleted.bind(this)}
-          onShow={this.handleShow.bind(this)}
+          onClearCompleted={this.handleClearCompleted}
+          onShow={this.handleShow}
         />
       );
     }
+    return null;
   }
 
   render() {

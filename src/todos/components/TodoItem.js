@@ -16,6 +16,7 @@ class TodoItem extends Component {
     this.state = {
       editing: false,
     };
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleEdit() {
@@ -42,7 +43,7 @@ class TodoItem extends Component {
     );
     const rightIconMenu = (
         <IconMenu iconButtonElement={iconButtonElement}>
-          <MenuItem primaryText="Edit" onTouchTap={this.handleEdit.bind(this)} />
+          <MenuItem primaryText="Edit" onTouchTap={this.handleEdit} />
           <MenuItem primaryText="Delete" onTouchTap={deleteFn} />
         </IconMenu>
     );
@@ -62,16 +63,17 @@ class TodoItem extends Component {
           onClick={onTouchTap}
           leftIcon={todo.completed ? <CheckBoxIcon /> : <CheckBoxBlankIcon />}
           rightIconButton={rightIconMenu}
-      />
+        />
       );
     }
 
     return (
-      <div className={classnames({
-        completed: todo.completed,
-        editing: this.state.editing,
-      })}
-    >
+      <div
+        className={classnames({
+          completed: todo.completed,
+          editing: this.state.editing,
+        })}
+      >
         {element}
       </div>
     );

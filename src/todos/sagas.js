@@ -5,7 +5,7 @@ import { call, put } from 'redux-saga/effects';
 import { actionTypes as actions } from './constants';
 
 // TODO - move this to api.js
-const getRequest = () => new Promise((resolve, reject) => {
+const getRequest = () => new Promise((resolve) => {
   const response = {
     todos: [
       {
@@ -25,7 +25,7 @@ const getRequest = () => new Promise((resolve, reject) => {
   }, Math.random() * 1000);
 });
 
-function * getTodos(action) {
+function * getTodos() {
   try {
     yield put({ type: actions.FETCHING });
     const { todos } = yield call(getRequest);
@@ -37,8 +37,6 @@ function * getTodos(action) {
 
 // Fetch todos whenever receive a FETCH action
 function * watchTodos() {
-  console.log(actions.FETCH);
-
   yield* takeEvery(actions.FETCH, getTodos);
 }
 

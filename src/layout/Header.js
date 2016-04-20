@@ -17,6 +17,11 @@ class Header extends Component {
     return { muiTheme: React.PropTypes.object };
   }
 
+  constructor(props, context) {
+    super(props, context);
+    this.handleSave = this.handleSave.bind(this);
+  }
+
   getChildContext() {
     return { muiTheme: getMuiTheme(MyRawTheme) };
   }
@@ -32,7 +37,11 @@ class Header extends Component {
       <header className="header">
         <AppBar title="Movio TODO MVC" />
         <h1 style={defaultStyle}>todos</h1>
-        <TodoTextInput newTodo onSave={this.handleSave.bind(this)} placeholder="What needs to be done?" />
+        <TodoTextInput
+          newTodo
+          onSave={this.handleSave}
+          placeholder="What needs to be done?"
+        />
       </header>
     );
   }

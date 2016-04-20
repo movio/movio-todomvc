@@ -12,6 +12,9 @@ class TodoTextInput extends Component {
     this.state = {
       text: this.props.text || '',
     };
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleEnter(e) {
@@ -46,9 +49,9 @@ class TodoTextInput extends Component {
         hintText={this.props.placeholder}
         autoFocus="true"
         value={this.state.text}
-        onBlur={this.handleBlur.bind(this)}
-        onChange={this.handleChange.bind(this)}
-        onKeyDown={this.handleEnter.bind(this)}
+        onBlur={this.handleBlur}
+        onChange={this.handleChange}
+        onKeyDown={this.handleEnter}
       />
     );
   }
