@@ -35,13 +35,15 @@ class TodoItem extends Component {
     const { todo, complete, deleteTodo, todoId } = this.props;
 
     const deleteFn = () => deleteTodo(todoId);
+    const iconButtonElement = (
+      <IconButton>
+        <MoreVertIcon color={colors.grey400} />
+      </IconButton>
+    );
     const rightIconMenu = (
-        <IconMenu iconButtonElement={
-            <IconButton>
-              <MoreVertIcon color={colors.grey400} />
-            </IconButton>}>
-          <MenuItem primaryText='Edit' onTouchTap={this.handleEdit.bind(this)} />
-          <MenuItem primaryText='Delete' onTouchTap={deleteFn} />
+        <IconMenu iconButtonElement={iconButtonElement}>
+          <MenuItem primaryText="Edit" onTouchTap={this.handleEdit.bind(this)} />
+          <MenuItem primaryText="Delete" onTouchTap={deleteFn} />
         </IconMenu>
     );
 
@@ -59,7 +61,8 @@ class TodoItem extends Component {
           onTouchTap={onTouchTap}
           onClick={onTouchTap}
           leftIcon={todo.completed ? <CheckBoxIcon /> : <CheckBoxBlankIcon />}
-          rightIconButton={rightIconMenu} />
+          rightIconButton={rightIconMenu}
+      />
       );
     }
 
@@ -67,7 +70,8 @@ class TodoItem extends Component {
       <div className={classnames({
         completed: todo.completed,
         editing: this.state.editing,
-      })}>
+      })}
+    >
         {element}
       </div>
     );
