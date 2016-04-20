@@ -39,8 +39,7 @@ class TodoItem extends Component {
         <IconMenu iconButtonElement={
             <IconButton>
               <MoreVertIcon color={colors.grey400} />
-            </IconButton>
-        }>
+            </IconButton>}>
           <MenuItem primaryText='Edit' onTouchTap={this.handleEdit.bind(this)} />
           <MenuItem primaryText='Delete' onTouchTap={deleteFn} />
         </IconMenu>
