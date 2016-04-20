@@ -1,5 +1,5 @@
-import { spacing, colors } from 'material-ui/styles'
-import * as ColorManipulator from 'material-ui/utils/colorManipulator'
+import { spacing, colors } from 'material-ui/styles';
+import * as ColorManipulator from 'material-ui/utils/colorManipulator';
 
 module.exports = {
   spacing: spacing,
@@ -15,6 +15,6 @@ module.exports = {
     alternateTextColor: colors.white,
     canvasColor: colors.white,
     borderColor: colors.grey300,
-    disabledColor: ColorManipulator.fade(colors.darkBlack, 0.3)
-  }
-}
+    disabledColor: ColorManipulator.fade(colors.darkBlack, 0.3),
+  },
+};
