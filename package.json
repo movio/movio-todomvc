@@ -4,11 +4,14 @@
   "description": "Movio's TodoMVC stack",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --progress --colors",
+    "start": "webpack-dev-server --hot --inline --progress --colors --host 0.0.0.0",
     "build": "webpack --progress --colors",
     "test": "standard-format -w",
-    "lint": "eslint",
-    "format": "eslint"
+    "lint": "eslint src",
+    "format": "eslint src --fix"
+  },
+  "eslintConfig": {
+    "extends": "airbnb"
   },
   "repository": {
     "type": "git",
@@ -37,6 +40,11 @@
     "babel-preset-movio": "^1.0.2",
     "babel-runtime": "^6.6.1",
     "css-loader": "^0.23.1",
+    "eslint": "^2.8.0",
+    "eslint-config-airbnb": "^7.0.0",
+    "eslint-plugin-import": "^1.5.0",
+    "eslint-plugin-jsx-a11y": "^0.6.2",
+    "eslint-plugin-react": "^5.0.1",
     "file-loader": "^0.8.5",
     "webpack": "^1.12.15",
     "webpack-dev-server": "^1.14.1",
