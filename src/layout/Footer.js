@@ -41,7 +41,7 @@ class Footer extends Component {
     const active = filter === selectedFilter;
     const count = this.getCountForFilter(filter);
     const onTouchTap = () => onShow(filter);
-    const getCountString = (countValue) => countValue > 0 ? `(${countValue})` : '';
+    const getCountString = countValue => countValue > 0 ? `(${countValue})` : '';
     return (
       <ListItem
         key={filter}
