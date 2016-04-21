@@ -7,7 +7,7 @@ describe('First Test', () => {
     expect('foo').to.equal('foo');
   });
   it('truthiness', () => {
-    expect(true).to.be.true;
-  })
+    expect(true).to.equal(true);
+  });
 });
 
