@@ -31,6 +31,12 @@ $ npm start
 Be careful! the webpack-dev-server rebuild files in `src` automatically but the bundled files are just placed on its memory. Build manually by allowing next section(Build assets), if you want need the bundled files.
 
 ## Standards
+Testing
+
+    $ npm test
+    # or
+    $ npm run watch
+
 Check styles before making a PR
 
     $ npm run lint
@@ -38,6 +44,10 @@ Check styles before making a PR
 Auto formatting
 
     $ npm run format
+    
+Ready for PR - runs tests and linting
+
+    $ npm run check
 
 
 ## Build assets

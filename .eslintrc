@@ -1,5 +1,8 @@
 {
   "extends": "airbnb",
+  "env": {
+    "mocha": true
+  },
   "parser": "babel-eslint",
   "rules": {
     "no-confusing-arrow": 0
