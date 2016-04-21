@@ -32,9 +32,9 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
-  standard: {
-    parser: 'babel-eslint'
-  }
+  // standard: {
+  //   parser: 'babel-eslint'
+  // }
 // eslint: {
 //   configFile: './.eslintrc'
 // },

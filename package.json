@@ -6,9 +6,10 @@
   "scripts": {
     "start": "webpack-dev-server --hot --inline --progress --colors --host 0.0.0.0",
     "build": "webpack --progress --colors",
-    "test": "eslint src",
-    "lint": "eslint src",
-    "format": "eslint src --fix",
+    "test": "karma start --single-run",
+    "test:watch": "karma start --auto-watch",
+    "lint": "eslint src test",
+    "format": "eslint src test --fix",
     "check": "npm run lint && npm run test"
   },
   "repository": {
@@ -37,6 +38,7 @@
     "babel-polyfill": "^6.7.4",
     "babel-preset-movio": "^1.0.2",
     "babel-runtime": "^6.6.1",
+    "chai": "^3.5.0",
     "css-loader": "^0.23.1",
     "eslint": "^2.8.0",
     "eslint-config-airbnb": "^7.0.0",
@@ -44,6 +46,13 @@
     "eslint-plugin-jsx-a11y": "^0.6.2",
     "eslint-plugin-react": "4.3.0",
     "file-loader": "^0.8.5",
+    "karma": "^0.13.22",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^0.2.2",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-webpack": "^1.7.0",
+    "mocha": "^2.4.5",
+    "phantomjs-prebuilt": "^2.1.7",
     "webpack": "^1.12.15",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.10.0"
