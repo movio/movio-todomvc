@@ -28,6 +28,15 @@ $ npm start
 
 Be careful! the webpack-dev-server rebuild files in `src` automatically but the bundled files are just placed on its memory. Build manually by allowing next section(Build assets), if you want need the bundled files.
 
+## Standards
+Check styles before making a PR
+
+    $ npm run lint
+
+Auto formatting
+
+    $ npm run format
+
 
 ## Build assets
 To put compiled files into `static` directory, type the following command.

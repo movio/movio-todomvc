@@ -1,8 +1,8 @@
-import { spacing, colors } from 'material-ui/styles'
-import * as ColorManipulator from 'material-ui/utils/colorManipulator'
+import { spacing, colors } from 'material-ui/styles';
+import * as ColorManipulator from 'material-ui/utils/colorManipulator';
 
 module.exports = {
-  spacing: spacing,
+  spacing,
   fontFamily: 'Roboto, sans-serif',
   palette: {
     primary1Color: colors.cyan500,
@@ -15,6 +15,6 @@ module.exports = {
     alternateTextColor: colors.white,
     canvasColor: colors.white,
     borderColor: colors.grey300,
-    disabledColor: ColorManipulator.fade(colors.darkBlack, 0.3)
-  }
-}
+    disabledColor: ColorManipulator.fade(colors.darkBlack, 0.3),
+  },
+};
