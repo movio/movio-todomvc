@@ -35,7 +35,7 @@ Testing
 
     $ npm test
     # or
-    $ npm run watch
+    $ npm run test:watch
 
 Check styles before making a PR
 
