@@ -6,8 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --hot --inline --progress --colors --host 0.0.0.0",
     "build": "webpack --progress --colors",
-    "test": "karma start",
-    "watch": "karma start --auto-watch",
+    "test": "karma start --single-run",
+    "test:watch": "karma start --auto-watch",
     "lint": "eslint src test",
     "format": "eslint src test --fix",
     "check": "npm run lint && npm run test"
