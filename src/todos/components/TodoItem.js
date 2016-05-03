@@ -42,10 +42,10 @@ class TodoItem extends Component {
       </IconButton>
     );
     const rightIconMenu = (
-        <IconMenu iconButtonElement={iconButtonElement}>
-          <MenuItem primaryText="Edit" onTouchTap={this.handleEdit} />
-          <MenuItem primaryText="Delete" onTouchTap={deleteFn} />
-        </IconMenu>
+      <IconMenu iconButtonElement={iconButtonElement}>
+        <MenuItem primaryText="Edit" onTouchTap={this.handleEdit} />
+        <MenuItem primaryText="Delete" onTouchTap={deleteFn} />
+      </IconMenu>
     );
 
     const onSave = (text) => this.handleSave(todoId, text);
