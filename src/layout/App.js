@@ -1,37 +1,21 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Header from './Header';
-import MainSection from './MainSection';
 import todos from '../todos';
 
-class App extends Component {
-  componentDidMount() {
-    this.props.actions.fetch();
-  }
-
-  render() {
-    const { todosData, actions } = this.props;
-    return (
-      <div>
-        <Header add={actions.add} />
-        <MainSection todosData={todosData} actions={actions} />
-      </div>
-    );
-  }
-}
+const App = (props) => (
+  <div>
+    <Header add={props.actions.add} />
+    {props.children}
+  </div>
+);
 
 App.propTypes = {
-  todosData: PropTypes.object.isRequired,
+  children: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
 };
-
-function mapStateToProps(state) {
-  return {
-    todosData: state.todos,
-  };
-}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -40,6 +24,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(App);
