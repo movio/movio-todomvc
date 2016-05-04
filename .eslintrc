@@ -3,8 +3,15 @@
   "env": {
     "mocha": true
   },
+  "plugins": ["react"],
   "parser": "babel-eslint",
   "rules": {
-    "no-confusing-arrow": 0
+    "no-confusing-arrow": "off",
+    "no-else-return": "off",
+    "max-len": ["error", 120],
+    "no-unused-vars": ["error", {"args": "none"}]
+  },
+  "settings": {
+    "import/resolver": "webpack"
   }
 }
