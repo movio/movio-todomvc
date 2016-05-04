@@ -6,6 +6,7 @@ import { Checkbox, List } from 'material-ui';
 import { getMuiTheme } from 'material-ui/styles';
 import MyRawTheme from '../../material_ui_raw_theme_file';
 
+import Header from './Header';
 import Footer from './Footer';
 import TodoItem from './TodoItem';
 
@@ -98,15 +99,18 @@ class MainSection extends Component {
     const completedCount = todosData.reduce((count, todo) => todo.completed ? count + 1 : count, 0);
 
     return (
-      <section className="main" style={defaultStyle}>
-        {this.renderToggleAll(completedCount)}
-        <List className="todo-list">
-        {filteredTodos.map(
-          (todo, id) => <TodoItem key={id} todo={todo} todoId={id} {...actions} />
-        )}
-        </List>
-        {this.renderFooter(completedCount)}
-      </section>
+      <div>
+        <Header add={this.props.actions.add} />
+        <section className="main" style={defaultStyle}>
+          {this.renderToggleAll(completedCount)}
+          <List className="todo-list">
+          {filteredTodos.map(
+            (todo, id) => <TodoItem key={id} todo={todo} todoId={id} {...actions} />
+          )}
+          </List>
+          {this.renderFooter(completedCount)}
+        </section>
+      </div>
     );
   }
 }

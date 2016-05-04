@@ -1,29 +1,15 @@
 import React, { PropTypes, Component } from 'react';
 
-import { AppBar } from 'material-ui';
-import { getMuiTheme } from 'material-ui/styles';
-
-import MyRawTheme from '../material_ui_raw_theme_file';
-
-import todos from '../todos';
-const { TodoTextInput } = todos;
+import TodoTextInput from './TodoTextInput';
 
 const defaultStyle = {
   marginLeft: 20,
 };
 
 class Header extends Component {
-  static get childContextTypes() {
-    return { muiTheme: React.PropTypes.object };
-  }
-
   constructor(props, context) {
     super(props, context);
     this.handleSave = this.handleSave.bind(this);
-  }
-
-  getChildContext() {
-    return { muiTheme: getMuiTheme(MyRawTheme) };
   }
 
   handleSave(text) {
@@ -35,7 +21,6 @@ class Header extends Component {
   render() {
     return (
       <header className="header">
-        <AppBar title="Movio TODO MVC" />
         <h1 style={defaultStyle}>todos</h1>
         <TodoTextInput
           newTodo
