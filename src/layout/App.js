@@ -1,45 +1,30 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, { PropTypes, Component } from 'react';
 
-import Header from './Header';
-import MainSection from './MainSection';
-import todos from '../todos';
+import { getMuiTheme } from 'material-ui/styles';
+import MyRawTheme from '../material_ui_raw_theme_file';
+
+import { AppBar } from 'material-ui';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.actions.fetch();
+  static get childContextTypes() {
+    return { muiTheme: React.PropTypes.object };
+  }
+  getChildContext() {
+    return { muiTheme: getMuiTheme(MyRawTheme) };
   }
 
   render() {
-    const { todosData, actions } = this.props;
     return (
       <div>
-        <Header add={actions.add} />
-        <MainSection todosData={todosData} actions={actions} />
+        <AppBar title="Movio TODO MVC" />
+        {this.props.children}
       </div>
     );
   }
 }
 
 App.propTypes = {
-  todosData: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
+  children: PropTypes.object.isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    todosData: state.todos,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(todos.actions, dispatch),
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default App;

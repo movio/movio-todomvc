@@ -7,10 +7,9 @@ import InboxIcon from 'material-ui/svg-icons/content/inbox';
 import LoopIcon from 'material-ui/svg-icons/av/loop';
 import ArchiveIcon from 'material-ui/svg-icons/content/archive';
 
-import MyRawTheme from '../material_ui_raw_theme_file';
+import MyRawTheme from '../../material_ui_raw_theme_file';
 
-import todos from '../todos';
-const { filters } = todos;
+import { filters } from '../constants';
 
 const palette = getMuiTheme(MyRawTheme).baseTheme.palette;
 
@@ -72,7 +71,7 @@ class Footer extends Component {
 
   render() {
     const filterFn = [filters.SHOW_ALL, filters.SHOW_ACTIVE, filters.SHOW_COMPLETED]
-      .map((filter) => this.renderFilterLink(filter));
+      .map(filter => this.renderFilterLink(filter));
     return (
       <footer className="footer">
         <Divider style={{ marginTop: 10 }} />

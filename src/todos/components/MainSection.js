@@ -1,12 +1,17 @@
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import { Checkbox, List } from 'material-ui';
 import { getMuiTheme } from 'material-ui/styles';
-import MyRawTheme from '../material_ui_raw_theme_file';
+import MyRawTheme from '../../material_ui_raw_theme_file';
 
+import Header from './Header';
 import Footer from './Footer';
-import todos from '../todos';
-const { filters, TodoItem } = todos;
+import TodoItem from './TodoItem';
+
+import { filters } from '../constants';
+import * as allActions from '../actions';
 
 const defaultStyle = {
   width: 300,
@@ -34,6 +39,11 @@ class MainSection extends Component {
   getChildContext() {
     return { muiTheme: getMuiTheme(MyRawTheme) };
   }
+
+  componentDidMount() {
+    this.props.actions.fetch();
+  }
+
 
   handleClearCompleted() {
     const atLeastOneCompleted = this.props.todosData.some((todo) => todo.completed);
@@ -89,15 +99,18 @@ class MainSection extends Component {
     const completedCount = todosData.reduce((count, todo) => todo.completed ? count + 1 : count, 0);
 
     return (
-      <section className="main" style={defaultStyle}>
-        {this.renderToggleAll(completedCount)}
-        <List className="todo-list">
-        {filteredTodos.map(
-          (todo, id) => <TodoItem key={id} todo={todo} todoId={id} {...actions} />
-        )}
-        </List>
-        {this.renderFooter(completedCount)}
-      </section>
+      <div>
+        <Header add={this.props.actions.add} />
+        <section className="main" style={defaultStyle}>
+          {this.renderToggleAll(completedCount)}
+          <List className="todo-list">
+          {filteredTodos.map(
+            (todo, id) => <TodoItem key={id} todo={todo} todoId={id} {...actions} />
+          )}
+          </List>
+          {this.renderFooter(completedCount)}
+        </section>
+      </div>
     );
   }
 }
@@ -107,4 +120,19 @@ MainSection.propTypes = {
   actions: PropTypes.object.isRequired,
 };
 
-export default MainSection;
+function mapStateToProps(state) {
+  return {
+    todosData: state.todos,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(allActions, dispatch),
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainSection);
