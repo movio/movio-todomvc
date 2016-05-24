@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "declaration": false,
+        "jsx": "react",
+        "module": "commonjs",
+        "noLib": false,
+        "removeComments": false,
+        "rootDir": ".",
+        "sourceMap": true,
+        "sourceRoot": ".",
+        "target": "ES6",
+        "outDir": "build",
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "baseUrl": "src",
+        "rootDirs": [
+            "src/"
+        ]
+    },
+    "filesGlob": [
+        "src/**/*.{ts,tsx}",
+        "custom-typings.d.ts",
+        "typings/index.d.ts"
+    ],
+    "awesomeTypescriptLoaderOptions": {
+        "useCache": false,
+        "useBabel": true,
+        "resolveGlobs": true,
+        "forkChecker": true,
+        "cacheDirectory": "node_modules/.awesome-typescript-loader-cache"
+    }
+}

@@ -1,0 +1,38 @@
+{
+  "globalDependencies": {
+    "assertion-error": "registry:dt/assertion-error#1.0.0+20160316155526",
+    "chai": "registry:dt/chai#3.4.0+20160317120654",
+    "chai-as-promised": "registry:dt/chai-as-promised#0.0.0+20160317120654",
+    "immutable": "file:node_modules/immutable/dist/immutable.d.ts",
+    "material-ui": "github:ngbrown/DefinitelyTyped/material-ui/material-ui.d.ts#material-ui-0-15-0",
+    "mocha": "registry:dt/mocha#2.2.5+20160317120654",
+    "node": "registry:dt/node#6.0.0+20160514165920",
+    "promises-a-plus": "registry:dt/promises-a-plus#0.0.0+20160317120654",
+    "react": "registry:dt/react#0.14.0+20160319053454",
+    "react-addons-create-fragment": "registry:dt/react-addons-create-fragment#0.14.0+20160316155526",
+    "react-addons-pure-render-mixin": "registry:dt/react-addons-pure-render-mixin#0.14.0+20160316155526",
+    "react-addons-test-utils": "registry:dt/react-addons-test-utils#0.14.0+20160316155526",
+    "react-addons-transition-group": "registry:dt/react-addons-transition-group#0.14.0+20160316155526",
+    "react-addons-update": "registry:dt/react-addons-update#0.14.0+20160316155526",
+    "react-dom": "registry:dt/react-dom#0.14.0+20160316155526",
+    "react-global": "registry:dt/react-global#0.14.0+20160316155526",
+    "react-redux": "registry:dt/react-redux#4.4.0+20160316155526",
+    "react-router": "registry:dt/react-router#2.0.0+20160330124659",
+    "react-router-redux": "registry:dt/react-router-redux#4.0.0+20160316155526",
+    "react-router/history": "registry:dt/react-router/history#2.0.0+20160316155526",
+    "react-tap-event-plugin": "registry:dt/react-tap-event-plugin#0.0.0+20160226083632",
+    "redux": "registry:dt/redux#3.3.1+20160326112656",
+    "redux-devtools": "registry:dt/redux-devtools#3.0.0+20151215130854",
+    "redux-devtools-dock-monitor": "registry:dt/redux-devtools-dock-monitor#1.0.1+20151216103641",
+    "redux-devtools-log-monitor": "registry:dt/redux-devtools-log-monitor#1.0.1+20151216103641",
+    "redux-logger": "registry:dt/redux-logger#2.6.0+20160316155526",
+    "redux-saga": "registry:dt/redux-saga#0.9.1+20160316155526"
+  },
+  "dependencies": {
+    "lodash": "registry:npm/lodash#4.0.0+20160305082308",
+    "radium": "registry:npm/radium#0.16.6+20160310030142"
+  },
+  "globalDevDependencies": {
+    "classnames": "registry:dt/classnames#0.0.0+20160316155526"
+  }
+}

@@ -1,12 +1,13 @@
-import React, { Component, PropTypes } from 'react';
-import classnames from 'classnames';
+import * as React from 'react'
+import { Component } from 'react';
+import * as classnames from 'classnames';
 import { TextField } from 'material-ui';
 
 const defaultStyle = {
   marginLeft: 20,
 };
 
-class TodoTextInput extends Component {
+class TodoTextInput extends Component<TodoTextInputProps, any> {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -47,7 +48,6 @@ class TodoTextInput extends Component {
         style={defaultStyle}
         type="text"
         hintText={this.props.placeholder}
-        autoFocus="true"
         value={this.state.text}
         onBlur={this.handleBlur}
         onChange={this.handleChange}
@@ -57,12 +57,12 @@ class TodoTextInput extends Component {
   }
 }
 
-TodoTextInput.propTypes = {
-  onSave: PropTypes.func.isRequired,
-  text: PropTypes.string,
-  placeholder: PropTypes.string,
-  editing: PropTypes.bool,
-  newTodo: PropTypes.bool,
-};
+interface TodoTextInputProps {
+  onSave: Function,
+  text?: string,
+  placeholder?: string,
+  editing?: boolean,
+  newTodo?: boolean,
+}
 
 export default TodoTextInput;

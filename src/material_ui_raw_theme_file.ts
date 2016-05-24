@@ -1,7 +1,7 @@
 import { spacing, colors } from 'material-ui/styles';
 import * as ColorManipulator from 'material-ui/utils/colorManipulator';
 
-module.exports = {
+export default {
   spacing,
   fontFamily: 'Roboto, sans-serif',
   palette: {

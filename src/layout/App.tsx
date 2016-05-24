@@ -1,16 +1,23 @@
-import React, { PropTypes, Component } from 'react';
+import * as React from 'react'
+import { Component } from 'react';
 
 import { getMuiTheme } from 'material-ui/styles';
 import MyRawTheme from '../material_ui_raw_theme_file';
 
 import { AppBar } from 'material-ui';
 
-class App extends Component {
-  static get childContextTypes() {
-    return { muiTheme: React.PropTypes.object };
+interface AppContext {
+  muiTheme: any
+}
+
+class App extends Component<AppProps, any> {
+
+  static childContextTypes = {
+    muiTheme:  React.PropTypes.object
   }
+
   getChildContext() {
-    return { muiTheme: getMuiTheme(MyRawTheme) };
+    return { muiTheme: getMuiTheme(MyRawTheme) }
   }
 
   render() {
@@ -23,8 +30,8 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  children: PropTypes.object.isRequired,
-};
+interface AppProps {
+  children: React.ReactNode[],
+}
 
 export default App;

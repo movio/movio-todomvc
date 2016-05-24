@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import * as React from 'react'
+import { Component } from 'react';
 
 import TodoTextInput from './TodoTextInput';
 
@@ -6,7 +7,7 @@ const defaultStyle = {
   marginLeft: 20,
 };
 
-class Header extends Component {
+class Header extends Component<HeaderProps, any> {
   constructor(props, context) {
     super(props, context);
     this.handleSave = this.handleSave.bind(this);
@@ -32,8 +33,8 @@ class Header extends Component {
   }
 }
 
-Header.propTypes = {
-  add: PropTypes.func.isRequired,
-};
+interface HeaderProps {
+  add: Function
+}
 
 export default Header;

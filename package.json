@@ -10,7 +10,8 @@
     "test:watch": "karma start --auto-watch",
     "lint": "eslint src test",
     "format": "eslint src test --fix",
-    "check": "npm run lint && npm run test"
+    "check": "npm run lint && npm run test",
+    "typings-install": "typings install"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "awesome-typescript-loader": "^0.17.0",
     "babel-core": "^6.7.7",
     "babel-eslint": "^6.0.4",
     "babel-loader": "^6.2.4",
@@ -56,6 +58,8 @@
     "karma-webpack": "^1.7.0",
     "mocha": "^2.4.5",
     "phantomjs-prebuilt": "^2.1.7",
+    "typescript": "^1.8.10",
+    "typings": "^1.0.4",
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.10.0"

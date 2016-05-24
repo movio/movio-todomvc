@@ -1,6 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import * as React from 'react'
+import { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+import { OrderedMap } from 'immutable'
 
 import { Checkbox, List } from 'material-ui';
 import { getMuiTheme } from 'material-ui/styles';
@@ -11,6 +14,7 @@ import Footer from './Footer';
 import TodoItem from './TodoItem';
 
 import { filters } from '../constants';
+import { TodoAction } from '../actions';
 import * as allActions from '../actions';
 
 const defaultStyle = {
@@ -24,16 +28,17 @@ const TODO_FILTERS = {
   [filters.SHOW_COMPLETED]: (todo) => todo.completed,
 };
 
-class MainSection extends Component {
-  static get childContextTypes() {
-    return { muiTheme: React.PropTypes.object };
-  }
+class MainSection extends Component<MainSectionProps, any> {
 
   constructor(props, context) {
     super(props, context);
     this.state = { filter: filters.SHOW_ALL };
     this.handleClearCompleted = this.handleClearCompleted.bind(this);
     this.handleShow = this.handleShow.bind(this);
+  }
+
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object
   }
 
   getChildContext() {
@@ -101,12 +106,12 @@ class MainSection extends Component {
     return (
       <div>
         <Header add={this.props.actions.add} />
-        <section className="main" style={defaultStyle}>
+        <section className="main todo-list" style={defaultStyle}>
           {this.renderToggleAll(completedCount)}
-          <List className="todo-list">
-          {filteredTodos.map(
-            (todo, id) => <TodoItem key={id} todo={todo} todoId={id} {...actions} />
-          )}
+          <List>
+          {filteredTodos.map((todo, id) => (
+            <TodoItem key={id} todo={todo} todoId={id} {...actions} />
+          )).toArray()}
           </List>
           {this.renderFooter(completedCount)}
         </section>
@@ -115,10 +120,18 @@ class MainSection extends Component {
   }
 }
 
-MainSection.propTypes = {
-  todosData: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-};
+interface MainSectionProps {
+  todosData: OrderedMap<number, any>,
+  actions: {
+    add: () => TodoAction,
+    deleteTodo: () => TodoAction,
+    edit: () => TodoAction,
+    complete: () => TodoAction,
+    toggleAll: () => TodoAction,
+    clearCompleted: () => TodoAction,
+    fetch: () => TodoAction,
+  },
+}
 
 function mapStateToProps(state) {
   return {
@@ -126,6 +139,7 @@ function mapStateToProps(state) {
   };
 }
 
+// TODO: maybe refactor this, I don't think it needs to be that complex
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(allActions, dispatch),

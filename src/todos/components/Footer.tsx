@@ -1,11 +1,12 @@
-import React, { PropTypes, Component } from 'react';
-import classnames from 'classnames';
-import { RaisedButton, List, ListItem, Divider } from 'material-ui';
-import { getMuiTheme } from 'material-ui/styles';
+import * as React from 'react';
+import { Component } from 'react'
+import * as classnames from 'classnames';
 
+import { getMuiTheme } from 'material-ui/styles';
+import { RaisedButton, List, ListItem, Divider, TouchTapEvent } from 'material-ui';
 import InboxIcon from 'material-ui/svg-icons/content/inbox';
 import LoopIcon from 'material-ui/svg-icons/av/loop';
-import ArchiveIcon from 'material-ui/svg-icons/content/archive';
+import ArchiveIcon from 'material-ui/svg-icons/content/archive'
 
 import MyRawTheme from '../../material_ui_raw_theme_file';
 
@@ -25,7 +26,7 @@ const FILTER_ICONS = {
   [filters.SHOW_COMPLETED]: <ArchiveIcon />,
 };
 
-class Footer extends Component {
+class Footer extends Component<FooterProps, any> {
   getCountForFilter(filter) {
     const { activeCount, completedCount } = this.props;
     if (filter === filters.SHOW_ALL) return activeCount + completedCount;
@@ -62,7 +63,7 @@ class Footer extends Component {
           className="clear-completed"
           primary
           label="Clear completed"
-          onClick={onClearCompleted}
+          onTouchTap={onClearCompleted}
         />
       );
     }
@@ -75,7 +76,8 @@ class Footer extends Component {
     return (
       <footer className="footer">
         <Divider style={{ marginTop: 10 }} />
-        <List className="filters">
+        {/* TODO: what is this ??? className="filters"*/}
+        <List>
           {filterFn}
         </List>
         {this.renderClearButton()}
@@ -84,12 +86,12 @@ class Footer extends Component {
   }
 }
 
-Footer.propTypes = {
-  completedCount: PropTypes.number.isRequired,
-  activeCount: PropTypes.number.isRequired,
-  filter: PropTypes.string.isRequired,
-  onClearCompleted: PropTypes.func.isRequired,
-  onShow: PropTypes.func.isRequired,
-};
+interface FooterProps {
+  completedCount: number,
+  activeCount: number,
+  filter: string,
+  onClearCompleted: (event: TouchTapEvent) => void,
+  onShow: Function,
+}
 
 export default Footer;

@@ -1,14 +1,12 @@
 import { actionTypes as t } from './constants';
 import { OrderedMap } from 'immutable';
 
+const assign = Object.assign
+
 const uuid = () => Math.floor(Math.random() * 100000);
 
-const todoMap = new OrderedMap();
+const todoMap = OrderedMap<any, any>();
 
-// FIXME - get from sagas
-// Please consider carefully, is it necessary to have the whole
-// state object in immutable collection, especially if you will
-// use reselect in the future.
 const initialState = todoMap;
 
 export default function todos(state = initialState, action) {
@@ -23,15 +21,19 @@ export default function todos(state = initialState, action) {
       return state.delete(action.id);
     }
     case t.EDIT: {
+      // TODO: WHAT?! we stored a mutable object in immutable collection?
+      //       If thats the case, why use immutable collection?
       const todoToEdit = state.get(action.id);
-      return state.set(action.id, { ...todoToEdit, text: action.text });
+      return state.set(action.id, assign({}, todoToEdit, { text: action.text }));
     }
     case t.COMPLETE: {
       const todoToComplete = state.get(action.id);
-      return state.set(action.id, { ...todoToComplete, completed: !todoToComplete.completed });
+      return state.set(action.id, assign({}, todoToComplete, {
+        completed: !todoToComplete.completed
+      }));
     }
     case t.TOGGLE_ALL: {
-      return state.map(r => ({ ...r, completed: !r.completed }));
+      return state.map(r => assign({}, r, { completed: !r.completed }));
     }
     case t.CLEAR_COMPLETED: {
       return state.filter(r => r.completed === false);

@@ -1,16 +1,16 @@
-import React, { Component, PropTypes } from 'react';
-import classnames from 'classnames';
+import * as React from 'react';
+import { Component } from 'react';
+import * as classnames from 'classnames';
 import TodoTextInput from './TodoTextInput';
 import { ListItem, IconButton } from 'material-ui';
 import { colors } from 'material-ui/styles';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
+import { IconMenu, MenuItem } from 'material-ui';
 
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import CheckBoxIcon from 'material-ui/svg-icons/toggle/check-box';
 import CheckBoxBlankIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank';
 
-class TodoItem extends Component {
+class TodoItem extends Component<TodoItemProps, TodoItemStates> {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -80,12 +80,16 @@ class TodoItem extends Component {
   }
 }
 
-TodoItem.propTypes = {
-  todo: PropTypes.object.isRequired,
-  edit: PropTypes.func.isRequired,
-  deleteTodo: PropTypes.func.isRequired,
-  complete: PropTypes.func.isRequired,
-  todoId: PropTypes.number.isRequired,
-};
+interface TodoItemProps {
+  todo: any,
+  todoId: number,
+  edit: Function,
+  deleteTodo: Function,
+  complete: Function,
+}
+
+interface TodoItemStates {
+  editing: boolean
+}
 
 export default TodoItem;
