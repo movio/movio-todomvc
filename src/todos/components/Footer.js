@@ -60,7 +60,7 @@ class Footer extends Component {
       return (
         <RaisedButton
           className="clear-completed"
-          primary
+          primary={true}
           label="Clear completed"
           onClick={onClearCompleted}
         />

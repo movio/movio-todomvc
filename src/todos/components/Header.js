@@ -23,7 +23,7 @@ class Header extends Component {
       <header className="header">
         <h1 style={defaultStyle}>todos</h1>
         <TodoTextInput
-          newTodo
+          newTodo={true}
           onSave={this.handleSave}
           placeholder="What needs to be done?"
         />
