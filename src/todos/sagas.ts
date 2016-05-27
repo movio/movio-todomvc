@@ -1,46 +1,82 @@
-import { takeEvery } from 'redux-saga';
-import { call, put } from 'redux-saga/effects';
-// import * as request from 'superagent';
+import { List } from 'immutable'
+import { takeLatest } from 'redux-saga'
+import { call, put, take, fork } from 'redux-saga/effects'
 
-import { actionTypes as actions } from './constants';
+import * as api from './api'
+import { add, update, remove, fetch } from './actions'
+import { TodoItem } from './models'
+import { todoActionTypes as t } from './constants'
 
-// TODO - move this to api.js
-const getRequest = () => new Promise((resolve) => {
-  const response = {
-    todos: [
-      {
-        text: 'Use Redux',
-        completed: false,
-      },
-      {
-        text: 'Use Saga',
-        completed: false,
-      },
-    ],
-  };
+function* getTodos() {
+  yield put(fetch.request())
+  const { response, error } = yield call(api.getTodoItems)
+  if (response)
+    yield put(fetch.success(response))
+    else
+    yield put(fetch.failure(error))
+}
 
-  // Faked the AJAX request
-  window.setTimeout(() => {
-    resolve(response);
-  }, Math.random() * 1000);
-});
+function* addTodo(text: string) {
+  yield put(add.request(text))
+  const newItem = TodoItem.create(text)
+  const { response, error } = yield call(api.putTodoItem, List.of(newItem))
+  if (response)
+    yield put(add.success(response))
+  else
+    yield put(add.failure(error))
+}
 
-function * getTodos() {
-  try {
-    yield put({ type: actions.FETCHING });
-    const { todos } = yield call(getRequest);
-    yield put({ type: actions.FETCH_SUCCESS, todos });
-  } catch (error) {
-    yield put({ type: actions.FETCH_ERROR, error });
+function* updateTodo(items: List<TodoItem>) {
+  yield put(update.request(items))
+  const { response, error } = yield call(api.putTodoItem, items)
+  if (response)
+    yield put(update.success(response))
+  else
+    yield put(update.failure(error))
+}
+
+function* deleteTodos(itemIds: List<number>) {
+  yield put(remove.request(itemIds))
+  const { response, error } = yield call(api.deleteTodoItems, itemIds)
+  if (response)
+    yield put(remove.success(itemIds))
+  else
+    yield put(remove.failure(error))
+}
+
+// ============================================================================
+
+function* watchGetTodos() {
+  yield* takeLatest(t.LOAD_TODOS, getTodos)
+}
+
+function* watchAddTodos() {
+  while (true) {
+    const action = yield take(t.ADD_TODO)
+    const { text } = action.payload
+    yield fork(addTodo, text)
   }
 }
 
-// Fetch todos whenever receive a FETCH action
-function * watchTodos() {
-  yield* takeEvery(actions.FETCH, getTodos);
+function* watchUpdateTodo() {
+  while (true) {
+    const action = yield take(t.UPDATE_TODO)
+    const { items } = action.payload
+    yield fork(updateTodo, items)
+  }
+}
+
+function* watchDeleteTodo() {
+  while (true) {
+    const action = yield take(t.DELETE_TODOS)
+    const { itemIds } = action.payload
+    yield fork(deleteTodos, itemIds)
+  }
 }
 
 export default [
-  watchTodos,
-];
-
+  watchGetTodos,
+  watchAddTodos,
+  watchUpdateTodo,
+  watchDeleteTodo,
+]

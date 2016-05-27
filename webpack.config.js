@@ -12,32 +12,31 @@ module.exports = {
 
   debug: true,
 
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'cheap-module-source-map',
 
   output: {
     path: __dirname + '/static',
     filename: 'bundle.js',
+    sourceMapFilename: '[name].map',
   },
 
   module: {
-    // TODO: Change to use tslint
-    // preLoaders: [
-    //   // Eslint loader
-    //   { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'eslint-loader' },
-    // ],
+    preLoaders: [
+      { test: /\.(ts|tsx)$/, exclude: /node_modules/, loader: 'tslint-loader' },
+    ],
     loaders: [
       { test: /\.html$/, loader: 'file?name=[name].[ext]' },
       { test: /\.css$/, loader: 'file?name=[name].[ext]' },
       { test: /\.tsx?/, loader: 'awesome-typescript-loader', exclude: [/\.test\.ts$/] },
-      // {
-      //   test: /\.(js|jsx)$/,
-      //   exclude: /node_modules/,
-      //   loaders: [
-      //     'react-hot',
-      //     'babel?presets[]=movio&cacheDirectory=true'],
-      // },
     ],
   },
+
+  tslint: {
+    emitErrors: false,
+    failOnHint: false,
+    resourcePath: 'src',
+  },
+
 
   resolve: {
     extensions: ['', '.ts', '.tsx', '.js', '.jsx'],
@@ -45,7 +44,6 @@ module.exports = {
       '',
       'src',
       'node_modules',
-      'bower_components',
     ],
     root: 'src',
   },

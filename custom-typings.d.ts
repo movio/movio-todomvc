@@ -19,3 +19,5 @@ interface NodeModule extends WebpackModule {}
 interface Window {
   devToolsExtension: any
 }
+
+declare var module: any

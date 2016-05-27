@@ -7,3 +7,7 @@ body {
   line-height: 20px;
   margin: 0px;
 }
+
+#todo-content {
+  margin-left: 20px;
+}

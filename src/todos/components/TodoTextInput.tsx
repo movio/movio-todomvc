@@ -1,68 +1,73 @@
 import * as React from 'react'
-import { Component } from 'react';
-import * as classnames from 'classnames';
-import { TextField } from 'material-ui';
+import { Component, FocusEvent } from 'react'
 
-const defaultStyle = {
-  marginLeft: 20,
-};
+import * as classnames from 'classnames'
 
-class TodoTextInput extends Component<TodoTextInputProps, any> {
+import { TextField } from 'material-ui'
+
+class TodoTextInput extends Component<InputProps, InputStates> {
   constructor(props, context) {
-    super(props, context);
+    super(props, context)
     this.state = {
       text: this.props.text || '',
-    };
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleEnter = this.handleEnter.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    }
   }
 
   handleEnter(e) {
+    const { isNew, onSave } = this.props
+    const { text } = this.state
+
     if (e.keyCode === 13) { // on enter
-      const text = e.target.value.trim();
-      this.props.onSave(text);
-      if (this.props.newTodo) {
-        this.setState({ text: '' });
-      }
+      onSave(text.trim())
+      if (isNew) this.setState({ text: '' })
     }
   }
 
   handleChange(e) {
-    this.setState({ text: e.target.value });
+    this.setState({ text: e.target.value })
   }
 
-  handleBlur(e) {
-    if (!this.props.newTodo) {
-      this.props.onSave(e.target.value);
-    }
+  handleBlur(e: FocusEvent) {
+    const { isNew, onSave } = this.props
+    const { text } = this.state
+    if (!isNew) onSave(text.trim())
   }
 
   render() {
+    const { isNew, editable, style } = this.props
+
+    const classNames = classnames({
+      'edit': editable,
+      'new-todo': isNew,
+    })
+
     return (
       <TextField
-        className={classnames({
-          edit: this.props.editing,
-          'new-todo': this.props.newTodo,
-        })}
-        style={defaultStyle}
+        id={Math.floor(Math.random() * 0x10000).toString()}
+        className={classNames}
+        style={style}
         type="text"
         hintText={this.props.placeholder}
         value={this.state.text}
-        onBlur={this.handleBlur}
-        onChange={this.handleChange}
-        onKeyDown={this.handleEnter}
+        onBlur={this.handleBlur.bind(this)}
+        onChange={this.handleChange.bind(this)}
+        onKeyDown={this.handleEnter.bind(this)}
       />
     );
   }
 }
 
-interface TodoTextInputProps {
-  onSave: Function,
-  text?: string,
+interface InputProps {
+  text: string,
+  isNew: boolean,
+  editable: boolean,
+  onSave: (text: string) => void,
+  style?: {[key: string]: any},
   placeholder?: string,
-  editing?: boolean,
-  newTodo?: boolean,
+}
+
+interface InputStates {
+  text: string,
 }
 
 export default TodoTextInput;
