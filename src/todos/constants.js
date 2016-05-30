@@ -7,10 +7,10 @@ export const actionTypes = {
   COMPLETE: 'todos/COMPLETE',
   TOGGLE_ALL: 'todos/TOGGLE_ALL',
   CLEAR_COMPLETED: 'todos/CLEAR_COMPLETED',
-  FETCH: 'todos/FETCH',
-  FETCHING: 'todos/FETCHING',
-  FETCH_SUCCESS: 'todos/FETCH_SUCCESS',
-  FETCH_ERROR: 'todos/FETCH_ERROR',
+  // FETCH: 'todos/FETCH',
+  // FETCHING: 'todos/FETCHING',
+  // FETCH_SUCCESS: 'todos/FETCH_SUCCESS',
+  // FETCH_ERROR: 'todos/FETCH_ERROR',
 };
 
 export const filters = {

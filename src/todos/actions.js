@@ -24,6 +24,6 @@ export function clearCompleted() {
   return { type: t.CLEAR_COMPLETED };
 }
 
-export function fetch() {
-  return { type: t.FETCH };
-}
+// export function fetch() {
+//   return { type: t.FETCH };
+// }

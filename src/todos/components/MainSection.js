@@ -11,7 +11,10 @@ import Footer from './Footer';
 import TodoItem from './TodoItem';
 
 import { filters } from '../constants';
-import * as allActions from '../actions';
+import * as mainActions from '../actions';
+import { actions as a } from '../sagas';
+
+const allActions = Object.assign({}, mainActions, a);
 
 const defaultStyle = {
   width: 300,
@@ -41,7 +44,7 @@ class MainSection extends Component {
   }
 
   componentDidMount() {
-    this.props.actions.fetch();
+    this.props.actions.getTodos_get();
   }
 
 

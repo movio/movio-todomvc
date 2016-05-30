@@ -1,4 +1,5 @@
 import { actionTypes as t } from './constants';
+import { actionTypes as at } from './sagas';
 import { OrderedMap } from 'immutable';
 
 const uuid = () => Math.floor(Math.random() * 100000);
@@ -36,13 +37,13 @@ export default function todos(state = initialState, action) {
     case t.CLEAR_COMPLETED: {
       return state.filter(r => r.completed === false);
     }
-    case t.FETCH_SUCCESS: {
+    case at.getTodosActionTypes.ok: {
       return action.todos.reduce(
         (newState, next) => newState.set(uuid(), next),
         initialState
       );
     }
-    case t.FETCH_ERROR: {
+    case at.getTodosActionTypes.error: {
       return initialState;
     }
     default: {
