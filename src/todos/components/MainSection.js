@@ -44,7 +44,7 @@ class MainSection extends Component {
   }
 
   componentDidMount() {
-    this.props.actions.getTodos_get('dummyPathParam', { dumuyQueryParam: 'someText' });
+    this.props.actions.getTodos_get('dummyPathParam', { dummyQueryParam: 'someText' });
   }
 
   handleClearCompleted() {

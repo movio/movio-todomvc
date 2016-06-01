@@ -77,6 +77,6 @@
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2",
     "redux-saga": "^0.10.2",
-    "superagent": "^1.8.3"
+    "superagent": "^2.0.0"
   }
 }

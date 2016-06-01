@@ -39,6 +39,9 @@ const actions = {
       aQueryParam,
     },
   }),
+  getTodos_doing: () => ({
+    type: actionTypes.getTodos_doing,
+  }),
   getTodos_success: (todos) => ({
     type: actionTypes.getTodos_success,
     payload: todos,
@@ -53,7 +56,7 @@ const actions = {
 function* saga(action) {
   const { aPathParam, aQueryParam } = action.payload;
   try {
-    yield put({ type: actions.getTodos_doing });
+    yield put(actions.getTodos_doing());
     const { response } = yield call(api, aPathParam, aQueryParam);
     yield put(actions.getTodos_success(response));
   } catch (error) {

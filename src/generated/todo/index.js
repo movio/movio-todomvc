@@ -15,10 +15,10 @@ const actions = Object.assign(
   postTodoSaga.actions
 );
 
-const sagas = [
+const sagas = [].concat(
   getTodosSaga.watchingSaga,
   postTodoSaga.watchingSaga,
-];
+);
 
 export {
   actionTypes,
