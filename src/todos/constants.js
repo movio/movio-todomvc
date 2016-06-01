@@ -1,20 +1,21 @@
-export const NAME = 'todos';
+export const name = 'todos';
 
-export const actionTypes = {
-  ADD: 'todos/ADD',
-  DELETE: 'todos/DELETE',
-  EDIT: 'todos/EDIT',
-  COMPLETE: 'todos/COMPLETE',
-  TOGGLE_ALL: 'todos/TOGGLE_ALL',
-  CLEAR_COMPLETED: 'todos/CLEAR_COMPLETED',
-  FETCH: 'todos/FETCH',
-  FETCHING: 'todos/FETCHING',
-  FETCH_SUCCESS: 'todos/FETCH_SUCCESS',
-  FETCH_ERROR: 'todos/FETCH_ERROR',
+const actionTypes = {
+  add: 'todos/add',
+  delete: 'todos/delete',
+  edit: 'todos/edit',
+  complete: 'todos/complete',
+  toggleAll: 'todos/toggleAll',
+  clearCompleted: 'todos/clearCompleted',
 };
 
-export const filters = {
-  SHOW_ALL: 'show_all',
-  SHOW_COMPLETED: 'show_completed',
-  SHOW_ACTIVE: 'show_active',
+const filters = {
+  showAll: 'showAll',
+  showCompletet: 'showCompleted',
+  showActive: 'showActive',
+};
+
+export {
+  actionTypes,
+  filters,
 };

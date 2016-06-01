@@ -1,8 +1,7 @@
-import todos from '../todos';
-const { sagas } = todos;
+import * as todoApi from '../generated/todo/';
 
 const allSagas = [].concat(
-  sagas
+  todoApi.sagas
   // others ...
 );
 

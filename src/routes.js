@@ -2,7 +2,7 @@ import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import App from './layout/App';
 
-import todos from './todos';
+import * as todos from './todos';
 
 const routes = (
   <Route path="/" component={App}>

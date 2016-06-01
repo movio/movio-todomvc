@@ -1,17 +1,17 @@
-import { NAME, actionTypes } from './constants';
+import { name, actionTypes } from './constants';
 import * as actions from './actions';
-import reducer from './reducer';
-import sagas from './sagas';
+import { reducers } from './reducer';
 
 // re-select
 // import * as selectors from './selectors'
+
 import MainSection from './components/MainSection';
 
-export default {
-  NAME,
+export {
+  name,
   actionTypes,
   actions,
-  reducer,
-  sagas,
+  reducers,
+  // sagas,
   MainSection,
 };

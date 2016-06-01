@@ -9,7 +9,7 @@
     "test": "karma start --single-run",
     "test:watch": "karma start --auto-watch",
     "lint": "eslint src test",
-    "format": "eslint src test --fix",
+    "format": "eslint src test --fix; exit 0",
     "check": "npm run lint && npm run test"
   },
   "repository": {
@@ -77,6 +77,6 @@
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2",
     "redux-saga": "^0.10.2",
-    "superagent": "^1.8.3"
+    "superagent": "^2.0.0"
   }
 }
