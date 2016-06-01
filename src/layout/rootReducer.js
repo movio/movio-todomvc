@@ -1,11 +1,15 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import todos from '../todos';
+import { reducers as todoReducers } from '../todos';
 
-const rootReducer = combineReducers({
-  [todos.name]: todos.reducer,
-  routing: routerReducer,
-});
+const routing = { routing: routerReducer };
 
-export default rootReducer;
+const allReducers = Object.assign(
+  {},
+  routing,
+  todoReducers
+);
+
+export default combineReducers(allReducers);
+

@@ -11,10 +11,10 @@ import Footer from './Footer';
 import TodoItem from './TodoItem';
 
 import { filters } from '../constants';
-import * as mainActions from '../actions';
-import getTodos from '../getTodosSaga';
 
-const allActions = Object.assign({}, mainActions, getTodos.actions);
+import * as mainActions from '../actions';
+import * as todoApi from '../../generated/todo';
+const allActions = Object.assign({}, mainActions, todoApi.actions);
 
 const defaultStyle = {
   width: 300,

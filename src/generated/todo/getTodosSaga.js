@@ -1,4 +1,4 @@
-// This whole file can be generated
+// This file is generated
 
 import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
@@ -53,7 +53,7 @@ const actions = {
 function* saga(action) {
   const { aPathParam, aQueryParam } = action.payload;
   try {
-    yield put({ type: actions.getTodos_working });
+    yield put({ type: actions.getTodos_doing });
     const { response } = yield call(api, aPathParam, aQueryParam);
     yield put(actions.getTodos_success(response));
   } catch (error) {
@@ -65,7 +65,7 @@ function* watchingSaga() {
   yield* takeEvery(actionTypes.getTodos_get, saga);
 }
 
-export default {
+export {
   actions,
   actionTypes,
   api,

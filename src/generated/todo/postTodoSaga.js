@@ -1,53 +1,61 @@
-// This whole file can be generated
+// This file is generated
 
-// import { takeEvery } from 'redux-saga';
-import { call, put, fork, take } from 'redux-saga/effects';
+import { takeEvery } from 'redux-saga';
+import { call, put } from 'redux-saga/effects';
 
 // FIXME - implement proper api
-const postRequest = () => new Promise((resolve) => {
-  window.setTimeout(() => {
-    resolve();
-  }, Math.random() * 1000);
-});
+function api(aPathParam, aQueryParam) {
+  return new Promise((resolve) => {
+    resolve('');
+  });
+}
 
 const actionTypes = {
-  post: 'postTodo/post',
-  working: 'postTodo/working',
-  ok: 'postTodo/ok',
-  error: 'postTodo/error',
+  postTodos_post: 'postTodos/post',
+  postTodos_doing: 'postTodos/doing',
+  postTodos_success: 'postTodos/success',
+  postTodos_failure: 'postTodos/failure',
 };
+
 const actions = {
-  postTodo_post: (todo) => ({
-    type: actionTypes.post,
-    todo,
+  postTodos_post: (body, aPathParam, aQueryParam) => ({
+    type: actionTypes.postTodos_post,
+    payload: {
+      body,
+      aPathParam,
+      aQueryParam,
+    },
   }),
-  postTodo_ok: (todo) => ({
-    type: actionTypes.ok,
-    todo,
+  postTodos_success: (todos) => ({
+    type: actionTypes.postTodos_success,
+    payload: todos,
   }),
-  postTodo_error: (err) => ({
-    type: actionTypes.error,
-    err,
+  postTodos_failure: (err) => ({
+    type: actionTypes.postTodos_failure,
+    payload: err,
+    error: true,
   }),
 };
 
-function * postTodo(todo) {
+function* saga(action) {
+  const { body, aPathParam, aQueryParam } = action.payload;
   try {
-    yield put({ type: actions.working });
-    const { todos } = yield call(postRequest);
-    yield put(actions.ok(todos));
+    yield put({ type: actions.postTodos_doing });
+    const { response } = yield call(api, body, aPathParam, aQueryParam);
+    yield put(actions.postTodos_success(response));
   } catch (error) {
-    yield put(actions.error(error));
+    yield put(actions.postTodos_failure(error));
   }
 }
-function * saga() {
-  const { todo } = yield take(actionTypes.post);
-  yield fork(postTodo, todo);
+
+function* watchingSaga() {
+  yield* takeEvery(actionTypes.postTodos_post, saga);
 }
 
-
-export default {
+export {
   actions,
   actionTypes,
+  api,
   saga,
+  watchingSaga,
 };

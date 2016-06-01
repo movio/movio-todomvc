@@ -1,7 +1,7 @@
 import { OrderedMap } from 'immutable';
 
 import { actionTypes as t } from './constants';
-import getTodosSaga from './getTodosSaga';
+import * as todoApi from '../generated/todo/';
 
 const uuid = () => Math.floor(Math.random() * 100000);
 
@@ -13,7 +13,7 @@ const todoMap = new OrderedMap();
 // use reselect in the future.
 const initialState = todoMap;
 
-export default function todos(state = initialState, action) {
+function todos(state = initialState, action) {
   switch (action.type) {
     case t.add: {
       return state.set(uuid(), {
@@ -38,14 +38,14 @@ export default function todos(state = initialState, action) {
     case t.clearCompeted: {
       return state.filter(r => r.completed === false);
     }
-    case getTodosSaga.actionTypes.success: {
+    case todoApi.actionTypes.success: {
       return action.todos.reduce(
         (newState, next) => newState.set(uuid(), next),
         initialState
       );
     }
     // fixme
-    case getTodosSaga.actionTypes.failure: {
+    case todoApi.actionTypes.failure: {
       return initialState;
     }
     default: {
@@ -53,3 +53,12 @@ export default function todos(state = initialState, action) {
     }
   }
 }
+
+const reducers = {
+  todos,
+};
+
+export {
+  reducers,
+  todos,
+};

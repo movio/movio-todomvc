@@ -1,6 +1,6 @@
 export const name = 'todos';
 
-export const actionTypes = {
+const actionTypes = {
   add: 'todos/add',
   delete: 'todos/delete',
   edit: 'todos/edit',
@@ -9,8 +9,13 @@ export const actionTypes = {
   clearCompleted: 'todos/clearCompleted',
 };
 
-export const filters = {
+const filters = {
   showAll: 'showAll',
   showCompletet: 'showCompleted',
   showActive: 'showActive',
+};
+
+export {
+  actionTypes,
+  filters,
 };
