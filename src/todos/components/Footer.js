@@ -13,29 +13,29 @@ import { filters } from '../constants';
 
 const palette = getMuiTheme(MyRawTheme).baseTheme.palette;
 
-const FILTER_TITLES = {
-  [filters.SHOW_ALL]: 'All',
-  [filters.SHOW_ACTIVE]: 'Active',
-  [filters.SHOW_COMPLETED]: 'Completed',
+const filterTitles = {
+  [filters.showAll]: 'All',
+  [filters.showActive]: 'Active',
+  [filters.showCompleted]: 'Completed',
 };
 
-const FILTER_ICONS = {
-  [filters.SHOW_ALL]: <InboxIcon />,
-  [filters.SHOW_ACTIVE]: <LoopIcon />,
-  [filters.SHOW_COMPLETED]: <ArchiveIcon />,
+const filterIcons = {
+  [filters.showAll]: <InboxIcon />,
+  [filters.showActive]: <LoopIcon />,
+  [filters.showCompleted]: <ArchiveIcon />,
 };
 
 class Footer extends Component {
   getCountForFilter(filter) {
     const { activeCount, completedCount } = this.props;
-    if (filter === filters.SHOW_ALL) return activeCount + completedCount;
-    if (filter === filters.SHOW_ACTIVE) return activeCount;
-    if (filter === filters.SHOW_COMPLETED) return completedCount;
+    if (filter === filters.showAll) return activeCount + completedCount;
+    if (filter === filters.showActive) return activeCount;
+    if (filter === filters.showCompleted) return completedCount;
     throw new Error('Invalid filter provided');
   }
 
   renderFilterLink(filter) {
-    const title = FILTER_TITLES[filter];
+    const title = filterTitles[filter];
     const { filter: selectedFilter, onShow } = this.props;
     const active = filter === selectedFilter;
     const count = this.getCountForFilter(filter);
@@ -47,7 +47,7 @@ class Footer extends Component {
         className={classnames({ selected: active })}
         style={{ color: active ? palette.primary1Color : palette.textColor }}
         primaryText={`${title} ${getCountString(count)}`}
-        leftIcon={FILTER_ICONS[filter]}
+        leftIcon={filterIcons[filter]}
         onClick={onTouchTap}
         onTouchTap={onTouchTap}
       />
@@ -70,7 +70,7 @@ class Footer extends Component {
   }
 
   render() {
-    const filterFn = [filters.SHOW_ALL, filters.SHOW_ACTIVE, filters.SHOW_COMPLETED]
+    const filterFn = [filters.showAll, filters.showActive, filters.showCompleted]
       .map(filter => this.renderFilterLink(filter));
     return (
       <footer className="footer">

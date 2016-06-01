@@ -1,6 +1,7 @@
-import { actionTypes as t } from './constants';
-import { actionTypes as at } from './sagas';
 import { OrderedMap } from 'immutable';
+
+import { actionTypes as t } from './constants';
+import getTodosSaga from './getTodosSaga';
 
 const uuid = () => Math.floor(Math.random() * 100000);
 
@@ -14,36 +15,37 @@ const initialState = todoMap;
 
 export default function todos(state = initialState, action) {
   switch (action.type) {
-    case t.ADD: {
+    case t.add: {
       return state.set(uuid(), {
         text: action.text,
         completed: false,
       });
     }
-    case t.DELETE: {
+    case t.delete: {
       return state.delete(action.id);
     }
-    case t.EDIT: {
+    case t.edit: {
       const todoToEdit = state.get(action.id);
       return state.set(action.id, { ...todoToEdit, text: action.text });
     }
-    case t.COMPLETE: {
+    case t.complete: {
       const todoToComplete = state.get(action.id);
       return state.set(action.id, { ...todoToComplete, completed: !todoToComplete.completed });
     }
-    case t.TOGGLE_ALL: {
+    case t.toggleAll: {
       return state.map(r => ({ ...r, completed: !r.completed }));
     }
-    case t.CLEAR_COMPLETED: {
+    case t.clearCompeted: {
       return state.filter(r => r.completed === false);
     }
-    case at.getTodosActionTypes.ok: {
+    case getTodosSaga.actionTypes.success: {
       return action.todos.reduce(
         (newState, next) => newState.set(uuid(), next),
         initialState
       );
     }
-    case at.getTodosActionTypes.error: {
+    // fixme
+    case getTodosSaga.actionTypes.failure: {
       return initialState;
     }
     default: {

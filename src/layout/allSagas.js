@@ -1,8 +1,8 @@
 import todos from '../todos';
-const { sagas } = todos;
+// const { sagas } = todos;
 
 const allSagas = [].concat(
-  sagas
+  todos.sagas
   // others ...
 );
 

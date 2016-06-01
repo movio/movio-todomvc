@@ -1,27 +1,36 @@
-import { NAME, actionTypes } from './constants';
-import * as actions from './actions';
+import { name, actionTypes as mainActionTypes } from './constants';
+import * as mainActions from './actions';
 import reducer from './reducer';
-import { sagas, actionTypes as at, actions as a } from './sagas';
+import getTodosSaga from './getTodosSaga';
+// import { postTodoSaga, postTodoActionTypes, postTodoActions } from './postTodoSaga';
 
 // re-select
 // import * as selectors from './selectors'
 
 import MainSection from './components/MainSection';
 
-const allActionTypes = Object.assign({},
-                                     actionTypes,
-                                     at
-                                    );
+const actionTypes = Object.assign(
+  {},
+  mainActionTypes,
+  getTodosSaga.actionTypes
+  // postTodoActionTypes
+);
 
-const allActions = Object.assign({},
-                                 actions,
-                                 a
-                                );
+const actions = Object.assign(
+  {},
+  mainActions,
+  getTodosSaga.actions
+  // postTodoActions
+);
+
+const sagas = [
+  getTodosSaga.watchingSaga,
+];
 
 export default {
-  NAME,
-  allActionTypes,
-  allActions,
+  name,
+  actionTypes,
+  actions,
   reducer,
   sagas,
   MainSection,
