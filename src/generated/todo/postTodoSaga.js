@@ -48,8 +48,18 @@ function* saga(action) {
   }
 }
 
-function* watchingSaga() {
+/**
+ * Start this saga if you'd prefer to process every action
+ */
+function* takeEvery() {
   yield* takeEvery(actionTypes.postTodos_post, saga);
+}
+
+/**
+ * Start this saga if you'd prefer to process only the latest action
+ */
+function* takeLatest() {
+  yield* takeLatest(actionTypes.postTodos_post, saga);
 }
 
 export {
@@ -57,5 +67,6 @@ export {
   actionTypes,
   api,
   saga,
-  watchingSaga,
+  takeEvery,
+  takeLatest,
 };
