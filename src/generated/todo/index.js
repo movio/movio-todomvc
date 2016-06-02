@@ -16,8 +16,8 @@ const actions = Object.assign(
 );
 
 const sagas = [].concat(
-  getTodosSaga.takeEvery,
-  postTodoSaga.takeLatest,
+  getTodosSaga.takeEverySaga,
+  postTodoSaga.takeLatestSaga,
 );
 
 export {

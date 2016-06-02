@@ -1,6 +1,6 @@
 // This file is generated
 
-import { takeEvery } from 'redux-saga';
+import { takeEvery, takeLatest } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 
 // FIXME - implement proper api
@@ -67,14 +67,14 @@ function* saga(action) {
 /**
  * Start this saga if you'd prefer to process every action
  */
-function* takeEvery() {
+function* takeEverySaga() {
   yield* takeEvery(actionTypes.getTodos_get, saga);
 }
 
 /**
  * Start this saga if you'd prefer to process only the latest action
  */
-function* takeLatest() {
+function* takeLatestSaga() {
   yield* takeLatest(actionTypes.getTodos_get, saga);
 }
 
@@ -83,7 +83,7 @@ export {
   actionTypes,
   api,
   saga,
-  takeEvery,
-  takeLatest,
+  takeEverySaga,
+  takeLatestSaga,
 };
 
