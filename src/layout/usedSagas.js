@@ -1,7 +1,7 @@
 import { sagas } from '../generated/todo/';
 const usedSagas = [].concat(
-  sagas.getTodosSaga.takeEverySaga,
-  sagas.postTodoSaga.takeLatestSaga
+  sagas.getTodosTakeEverySaga,
+  sagas.postTodosTakeLatestSaga
   // others ...
 );
 export default usedSagas;

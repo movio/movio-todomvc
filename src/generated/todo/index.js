@@ -16,14 +16,10 @@ const actions = Object.assign(
 );
 
 const sagas = {
-  getTodosSaga: {
-    takeEverySaga: getTodosSaga.takeEverySaga,
-    takeLatestSaga: getTodosSaga.takeLatestSaga,
-  },
-  postTodoSaga: {
-    takeEverySaga: postTodoSaga.takeEverySaga,
-    takeLatestSaga: postTodoSaga.takeLatestSaga,
-  },
+  getTodosTakeEverySaga: getTodosSaga.takeEverySaga,
+  getTodosTakeLatestSaga: getTodosSaga.takeLatestSaga,
+  postTodosTakeEverySaga: postTodoSaga.takeEverySaga,
+  postTodosTakeLatestSaga: postTodoSaga.takeLatestSaga,
 };
 
 export {
