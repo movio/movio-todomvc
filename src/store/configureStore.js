@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../layout/rootReducer';
-import allSagas from '../layout/allSagas';
+import usedSagas from '../layout/usedSagas';
 
 export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
@@ -19,7 +19,7 @@ export default function configureStore() {
   }
 
   // Run Sagas - needs to be done after the middleware is added to the store
-  allSagas.map((_) => sagaMiddleware.run(_));
+  usedSagas.map((_) => sagaMiddleware.run(_));
 
   return store;
 }
