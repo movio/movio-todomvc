@@ -60,5 +60,4 @@ const reducers = {
 
 export {
   reducers,
-  todos,
 };
