@@ -1,7 +1,7 @@
-import * as todoApi from '../generated/todo/';
+import { sagas } from '../generated/todo/';
 const usedSagas = [].concat(
-  todoApi.sagas.getTodosSaga.takeEverySaga,
-  todoApi.sagas.postTodoSaga.takeLatestSaga
+  sagas.getTodosSaga.takeEverySaga,
+  sagas.postTodoSaga.takeLatestSaga
   // others ...
 );
 export default usedSagas;
