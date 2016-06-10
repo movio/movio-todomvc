@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react'
 import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
 
 import * as classnames from 'classnames'
 import * as IM from 'immutable'
@@ -112,15 +113,17 @@ interface FooterProps {
   updateFilterType: (type: string) => any,
 }
 
-function mapStateToProps(state) {
-  const items = selectors.getTodoData(state)
-  const completedItemIds = items.filter(s => s.completed).map(s => s.id)
-  const filterType = selectors.getFilterType(state)
+const selector = createSelector(
+  selectors.getTodoData,
+  selectors.getFilterType,
+  (items, filterType) => ({
+    items,
+    filterType,
+    completedItemIds: items.filter(s => s.completed).map(s => s.id)
+  })
+)
 
-  return { items, completedItemIds, filterType }
-}
-
-export default connect(mapStateToProps, {
+export default connect(selector, {
   deleteTodo,
   updateFilterType,
 })(Footer)

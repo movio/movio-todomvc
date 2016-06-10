@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Component } from 'react'
 import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
 
 import * as classnames from 'classnames'
 import * as IM from 'immutable'
@@ -183,12 +184,13 @@ interface TodoListItemStates {
   editable: boolean
 }
 
-const mapStateToProps = (state) => ({
-  items: selectors.getTodoData(state),
-  filterType: selectors.getFilterType(state),
-})
+const selector = createSelector(
+  selectors.getTodoData,
+  selectors.getFilterType,
+  (items, filterType) => ({ items, filterType })
+)
 
-export default connect(mapStateToProps, {
+export default connect(selector, {
   addTodo,
   updateTodo,
   deleteTodo,
