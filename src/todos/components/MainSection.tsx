@@ -2,11 +2,11 @@ import * as React from 'react'
 import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { loadTodoItems } from './actions'
+import { loadTodoItems } from '../actions'
 
-import Footer from './components/Footer'
-import Header from './components/Header'
-import TodoList from './components/TodoList'
+import Footer from './Footer'
+import Header from './Header'
+import TodoList from './TodoList'
 
 class MainSection extends Component<MainSectionProps, any> {
 

@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux'
 import { List } from 'immutable'
 
 import { TodoItem } from './models'
@@ -10,12 +11,18 @@ import {
 import update = require('react-addons-update')
 
 const initialState = {
-  isFetching: false,
-  data: List<TodoItem>(),
-  filterType: t.SHOW_ALL,
+  todoItems: {
+    isFetching: false,
+    data: List<TodoItem>(),
+  },
+  todoFilter: {
+    filterType: t.SHOW_ALL,
+  },
 }
 
-export function todos(state = initialState, action) {
+// TODO: The only reason I expose this function is for testing
+//       Can anyone suggest another solution?
+export function todoItems(state = initialState.todoItems, action) {
   switch (action.type) {
 
     case r.FETCH_REQUEST:
@@ -38,7 +45,7 @@ export function todos(state = initialState, action) {
       return update(state, {
         data: {$set: action.payload.items}
       })
-    case r.UPDATE_SUCCESS:
+    case r.UPDATE_FAILURE:
       console.error('Failed to save todo item.', action.error)
       return state
 
@@ -47,6 +54,14 @@ export function todos(state = initialState, action) {
       return update(state, {
         data: {$set: state.data.filter(s => !deleted.contains(s.id))}
       })
+
+    default:
+      return state
+  }
+}
+
+export function todoFilter(state = initialState.todoFilter, action) {
+  switch (action.type) {
 
     case f.UPDATE_FILTER:
       return update(state, {
@@ -57,3 +72,8 @@ export function todos(state = initialState, action) {
       return state
   }
 }
+
+export default combineReducers({
+  todoItems,
+  todoFilter,
+})

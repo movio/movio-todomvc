@@ -2,11 +2,11 @@ import * as React from 'react'
 import { IndexRoute, Route } from 'react-router'
 import App from './layout/App'
 
-import TodoSection from './todos'
+import { MainSection as Todo } from './todos'
 
 const routes = (
   <Route path="/" component={App}>
-    <IndexRoute component={TodoSection} />
+    <IndexRoute component={Todo} />
   </Route>
 )
 

@@ -6,7 +6,7 @@ import {
   todoRequests as r,
   filterTypes as t,
 } from './constants'
-import { todos } from './reducer'
+import { todoItems } from './reducer'
 
 const assign = Object.assign
 
@@ -27,7 +27,7 @@ describe('Todos Reducer', () => {
 
   describe('default', () => {
     it('should return original state if no action type mateched', () => {
-      const actual = todos(fixture.testState(), { type: 'NOT_EXISTS' })
+      const actual = todoItems(fixture.testState(), { type: 'NOT_EXISTS' })
       expect(actual).to.deep.equal((fixture.testState()))
     })
   })
@@ -37,7 +37,7 @@ describe('Todos Reducer', () => {
       const expected = assign(fixture.testState(), {
         isFetching: true,
       })
-      const actual = todos(fixture.testState(), { type: r.FETCH_REQUEST })
+      const actual = todoItems(fixture.testState(), { type: r.FETCH_REQUEST })
       expect(actual).to.deep.equal(expected)
     })
 
@@ -46,7 +46,7 @@ describe('Todos Reducer', () => {
         isFetching: false,
         data: List.of(fixture.testTodo1()),
       })
-      const actual = todos(fixture.testState(), {
+      const actual = todoItems(fixture.testState(), {
         type: r.FETCH_SUCCESS,
         payload: {
           items: List.of(fixture.testTodo1()),
@@ -60,7 +60,7 @@ describe('Todos Reducer', () => {
         isFetching: false,
         data: List<TodoItem>(),
       })
-      const actual = todos(fixture.testState(), {
+      const actual = todoItems(fixture.testState(), {
         type: r.FETCH_FAILURE,
         error: new Error('In purpose error.')
       })

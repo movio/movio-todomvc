@@ -1,7 +1,7 @@
-import todoSagas from '../todos/sagas'
+import { sagas } from '../todos'
 
 const allSagas = [].concat(
-  todoSagas
+  sagas
   // others ...
 )
 
