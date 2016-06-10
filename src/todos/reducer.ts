@@ -1,54 +1,59 @@
-import { actionTypes as t } from './constants';
-import { OrderedMap } from 'immutable';
+import { List } from 'immutable'
 
-const assign = Object.assign
+import { TodoItem } from './models'
+import {
+  todoRequests as r,
+  filterTypes as t,
+  filterActionTypes as f,
+} from './constants'
 
-const uuid = () => Math.floor(Math.random() * 100000);
+import update = require('react-addons-update')
 
-const todoMap = OrderedMap<any, any>();
+const initialState = {
+  isFetching: false,
+  data: List<TodoItem>(),
+  filterType: t.SHOW_ALL,
+}
 
-const initialState = todoMap;
-
-export default function todos(state = initialState, action) {
+export function todos(state = initialState, action) {
   switch (action.type) {
-    case t.ADD: {
-      return state.set(uuid(), {
-        text: action.text,
-        completed: false,
-      });
-    }
-    case t.DELETE: {
-      return state.delete(action.id);
-    }
-    case t.EDIT: {
-      // TODO: WHAT?! we stored a mutable object in immutable collection?
-      //       If thats the case, why use immutable collection?
-      const todoToEdit = state.get(action.id);
-      return state.set(action.id, assign({}, todoToEdit, { text: action.text }));
-    }
-    case t.COMPLETE: {
-      const todoToComplete = state.get(action.id);
-      return state.set(action.id, assign({}, todoToComplete, {
-        completed: !todoToComplete.completed
-      }));
-    }
-    case t.TOGGLE_ALL: {
-      return state.map(r => assign({}, r, { completed: !r.completed }));
-    }
-    case t.CLEAR_COMPLETED: {
-      return state.filter(r => r.completed === false);
-    }
-    case t.FETCH_SUCCESS: {
-      return action.todos.reduce(
-        (newState, next) => newState.set(uuid(), next),
-        initialState
-      );
-    }
-    case t.FETCH_ERROR: {
-      return initialState;
-    }
-    default: {
-      return state;
-    }
+
+    case r.FETCH_REQUEST:
+      return update(state, {
+        isFetching: {$set: true},
+      })
+    case r.FETCH_SUCCESS:
+      return update(state, {
+        isFetching: {$set: false},
+        data: {$set: action.payload.items},
+      })
+    case r.FETCH_FAILURE:
+      console.error('Failed to fetch todo items.', action.error)
+      return update(state, {
+        isFetching: {$set: false},
+        data: {$set: List<TodoItem>()},
+      })
+
+    case r.UPDATE_SUCCESS:
+      return update(state, {
+        data: {$set: action.payload.items}
+      })
+    case r.UPDATE_SUCCESS:
+      console.error('Failed to save todo item.', action.error)
+      return state
+
+    case r.DELETE_SUCCESS:
+      const { deleted } = action.payload
+      return update(state, {
+        data: {$set: state.data.filter(s => !deleted.contains(s.id))}
+      })
+
+    case f.UPDATE_FILTER:
+      return update(state, {
+        filterType: {$set: action.payload.type}
+      })
+
+    default:
+      return state
   }
 }

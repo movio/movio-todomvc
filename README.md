@@ -21,6 +21,11 @@
 $ npm install
 ```
 
+## Resolve typing definitions
+```bash
+$ npm run typings-install
+```
+
 ## Use development server
 For development server, webpack-dev-server is reasonable. It monitors update files and rebuild them automatically. Since webpack cli command is registerd in `package.json` in this project, just type following command to run webpack-dev-server.
 
@@ -44,7 +49,7 @@ Check styles before making a PR
 Auto formatting
 
     $ npm run format
-    
+
 Ready for PR - runs tests and linting
 
     $ npm run check

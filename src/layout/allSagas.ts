@@ -1,10 +1,9 @@
-import todos from '../todos';
-const { sagas } = todos;
+import todoSagas from '../todos/sagas'
 
 const allSagas = [].concat(
-  sagas
+  todoSagas
   // others ...
-);
+)
 
-export default allSagas;
+export default allSagas
 

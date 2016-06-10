@@ -1,97 +1,126 @@
 import * as React from 'react';
 import { Component } from 'react'
-import * as classnames from 'classnames';
+import { connect } from 'react-redux'
 
-import { getMuiTheme } from 'material-ui/styles';
-import { RaisedButton, List, ListItem, Divider, TouchTapEvent } from 'material-ui';
-import InboxIcon from 'material-ui/svg-icons/content/inbox';
-import LoopIcon from 'material-ui/svg-icons/av/loop';
+import * as classnames from 'classnames'
+import * as IM from 'immutable'
+
+import { RaisedButton, List, ListItem, Divider } from 'material-ui'
+import { getMuiTheme } from 'material-ui/styles'
+import InboxIcon from 'material-ui/svg-icons/content/inbox'
+import LoopIcon from 'material-ui/svg-icons/av/loop'
 import ArchiveIcon from 'material-ui/svg-icons/content/archive'
 
-import MyRawTheme from '../../material_ui_raw_theme_file';
+import * as selectors from '../selectors'
+import { filterTypes as t, filters, Filter } from '../constants'
+import { TodoItem } from '../models'
+import { deleteTodo, updateFilterType } from '../actions'
+import MyRawTheme from '../../material_ui_raw_theme_file'
 
-import { filters } from '../constants';
+const palette = getMuiTheme(MyRawTheme).baseTheme.palette
 
-const palette = getMuiTheme(MyRawTheme).baseTheme.palette;
-
-const FILTER_TITLES = {
-  [filters.SHOW_ALL]: 'All',
-  [filters.SHOW_ACTIVE]: 'Active',
-  [filters.SHOW_COMPLETED]: 'Completed',
-};
-
-const FILTER_ICONS = {
-  [filters.SHOW_ALL]: <InboxIcon />,
-  [filters.SHOW_ACTIVE]: <LoopIcon />,
-  [filters.SHOW_COMPLETED]: <ArchiveIcon />,
-};
+export const filterIconMaps = {
+  [t.SHOW_ALL]: {
+    icon: <InboxIcon />,
+  },
+  [t.SHOW_ACTIVE]: {
+    icon: <LoopIcon />,
+  },
+  [t.SHOW_COMPLETED]: {
+    icon: <ArchiveIcon />,
+  }
+}
 
 class Footer extends Component<FooterProps, any> {
-  getCountForFilter(filter) {
-    const { activeCount, completedCount } = this.props;
-    if (filter === filters.SHOW_ALL) return activeCount + completedCount;
-    if (filter === filters.SHOW_ACTIVE) return activeCount;
-    if (filter === filters.SHOW_COMPLETED) return completedCount;
-    throw new Error('Invalid filter provided');
+
+  getFilterIcon(filterType: string) {
+    switch (filterType) {
+      case t.SHOW_ALL:
+        return <InboxIcon />
+      case t.SHOW_ACTIVE:
+        return <LoopIcon />
+      case t.SHOW_COMPLETED:
+        return <ArchiveIcon />
+      default:
+        throw new Error(`Unknown filter type: ${filterType}.`)
+    }
   }
 
-  renderFilterLink(filter) {
-    const title = FILTER_TITLES[filter];
-    const { filter: selectedFilter, onShow } = this.props;
-    const active = filter === selectedFilter;
-    const count = this.getCountForFilter(filter);
-    const onTouchTap = () => onShow(filter);
-    const getCountString = countValue => countValue > 0 ? `(${countValue})` : '';
+  handleFilterChange(filterType: string) {
+    const { updateFilterType } = this.props
+    updateFilterType(filterType)
+  }
+
+  renderFilterLink(filter: Filter) {
+    const { items, filterType } = this.props
+    const { type, name, fn } = filter
+
+    const active = type === filterType
+    const count = fn(items).size
+    const icon = this.getFilterIcon(type)
+
     return (
       <ListItem
-        key={filter}
+        key={filter.type}
         className={classnames({ selected: active })}
         style={{ color: active ? palette.primary1Color : palette.textColor }}
-        primaryText={`${title} ${getCountString(count)}`}
-        leftIcon={FILTER_ICONS[filter]}
-        onClick={onTouchTap}
-        onTouchTap={onTouchTap}
+        primaryText={`${name} ${count > 0 ? `(${count})` : ''}`}
+        leftIcon={icon}
+        onTouchTap={() => this.handleFilterChange(type)}
       />
-    );
+    )
   }
 
-  renderClearButton() {
-    const { completedCount, onClearCompleted } = this.props;
-    if (completedCount > 0) {
-      return (
-        <RaisedButton
-          className="clear-completed"
-          primary
-          label="Clear completed"
-          onTouchTap={onClearCompleted}
-        />
-      );
+  handleClearCompleted() {
+    const { completedItemIds, deleteTodo } = this.props
+    if (!completedItemIds.isEmpty()) {
+      deleteTodo(completedItemIds)
     }
-    return null;
   }
 
   render() {
-    const filterFn = [filters.SHOW_ALL, filters.SHOW_ACTIVE, filters.SHOW_COMPLETED]
-      .map(filter => this.renderFilterLink(filter));
+    const { completedItemIds } = this.props
+
     return (
       <footer className="footer">
-        <Divider style={{ marginTop: 10 }} />
-        {/* TODO: what is this ??? className="filters"*/}
+        <Divider />
+
         <List>
-          {filterFn}
+          {Object.keys(filters).map(
+            type => this.renderFilterLink(filters[type])
+          )}
         </List>
-        {this.renderClearButton()}
+
+        {completedItemIds.isEmpty() ? undefined :
+          <RaisedButton
+            className="clear-completed"
+            primary={true}
+            label="Clear completed"
+            onTouchTap={this.handleClearCompleted.bind(this)}
+          />
+        }
       </footer>
-    );
+    )
   }
 }
 
 interface FooterProps {
-  completedCount: number,
-  activeCount: number,
-  filter: string,
-  onClearCompleted: (event: TouchTapEvent) => void,
-  onShow: Function,
+  filterType: string,
+  items: IM.List<TodoItem>,
+  completedItemIds: IM.List<number>,
+  deleteTodo: (ids: IM.List<number>) => any,
+  updateFilterType: (type: string) => any,
 }
 
-export default Footer;
+function mapStateToProps(state) {
+  const items = selectors.getTodoData(state)
+  const completedItemIds = items.filter(s => s.completed).map(s => s.id)
+  const filterType = selectors.getFilterType(state)
+
+  return { items, completedItemIds, filterType }
+}
+
+export default connect(mapStateToProps, {
+  deleteTodo,
+  updateFilterType,
+})(Footer)

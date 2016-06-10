@@ -1,14 +1,14 @@
-var path = require('path');
-var webpackConfig = require('./webpack.config.js');
-var entry = path.resolve(webpackConfig.context, webpackConfig.entry.jsx);
-var preprocessors = {};
-preprocessors[entry] = ['webpack'];
+/* eslint-disable */
+
+// NOTE: seems karma doesn't like your JS style :-P
+
+const path = require('path')
 
 module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: 'src',
+    basePath: '',
 
 
     // frameworks to use
@@ -22,8 +22,12 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     // files: [entry],
-    files: ['**/*.test.js'],
-    webpack: webpackConfig,
+    files: [
+      { pattern: './test-bundle.js', watched: false }
+    ],
+
+
+    webpack: require('./webpack.config.test.js'),
 
 
     // list of files to exclude
@@ -35,14 +39,14 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     // preprocessors: preprocessors,
     preprocessors: {
-      '**/*.test.js': ['webpack']
+      './test-bundle.js': ['webpack', 'sourcemap']
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['mocha'],
 
 
     // web server port
@@ -68,11 +72,14 @@ module.exports = function(config) {
     concurrency: Infinity,
 
     plugins: [
-      require('karma-webpack'),
+      'karma-webpack',
       'karma-chai',
       'karma-mocha',
+      'karma-mocha-reporter',
       'karma-phantomjs-launcher',
-      'karma-phantomjs-shim'
+      'karma-phantomjs-shim',
+      'karma-sourcemap-loader'
     ]
   })
-}
+};
+

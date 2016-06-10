@@ -19,8 +19,12 @@
             "src/"
         ]
     },
+    "exclude": [
+        "./node_modules"
+    ],
     "filesGlob": [
         "src/**/*.{ts,tsx}",
+        "!./node_modules/**",
         "custom-typings.d.ts",
         "typings/index.d.ts"
     ],

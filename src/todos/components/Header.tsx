@@ -1,11 +1,9 @@
 import * as React from 'react'
-import { Component } from 'react';
+import { Component } from 'react'
+import { connect } from 'react-redux'
 
-import TodoTextInput from './TodoTextInput';
-
-const defaultStyle = {
-  marginLeft: 20,
-};
+import TodoTextInput from './TodoTextInput'
+import { addTodo } from '../actions'
 
 class Header extends Component<HeaderProps, any> {
   constructor(props, context) {
@@ -13,19 +11,22 @@ class Header extends Component<HeaderProps, any> {
     this.handleSave = this.handleSave.bind(this);
   }
 
-  handleSave(text) {
+  handleSave(text: string) {
     if (text.length !== 0) {
-      this.props.add(text);
+      this.props.addTodo(text)
     }
   }
 
   render() {
     return (
       <header className="header">
-        <h1 style={defaultStyle}>todos</h1>
+        <h1>todos</h1>
         <TodoTextInput
-          newTodo
-          onSave={this.handleSave}
+          text=""
+          style={{ width: '100%' }}
+          isNew={true}
+          editable={true}
+          onSave={this.handleSave.bind(this)}
           placeholder="What needs to be done?"
         />
       </header>
@@ -34,7 +35,9 @@ class Header extends Component<HeaderProps, any> {
 }
 
 interface HeaderProps {
-  add: Function
+  addTodo: (text: string) => void
 }
 
-export default Header;
+export default connect(undefined, {
+  addTodo
+})(Header)
