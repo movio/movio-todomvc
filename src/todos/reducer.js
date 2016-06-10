@@ -1,7 +1,7 @@
 import { OrderedMap } from 'immutable';
 
 import { actionTypes as t } from './constants';
-import * as todoApi from '../generated/todo/';
+import { actionTypes } from '../generated/todo/';
 
 const uuid = () => Math.floor(Math.random() * 100000);
 
@@ -38,14 +38,14 @@ function todos(state = initialState, action) {
     case t.clearCompeted: {
       return state.filter(r => r.completed === false);
     }
-    case todoApi.actionTypes.success: {
+    case actionTypes.success: {
       return action.todos.reduce(
         (newState, next) => newState.set(uuid(), next),
         initialState
       );
     }
     // fixme
-    case todoApi.actionTypes.failure: {
+    case actionTypes.failure: {
       return initialState;
     }
     default: {

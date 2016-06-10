@@ -1,40 +1,11 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-module.exports = {
-  context: __dirname + '/src',
-  entry: [
-    'babel-polyfill',
-    './index.js'
-  ],
-  debug: true,
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const baseConfig = require('./base.webpack.config');
+module.exports = Object.assign({}, baseConfig, {
   devtool: 'source-map',
-
-  output: {
-    path: __dirname + '/static',
-    filename: 'bundle.js',
-  },
-  module: {
+  module: Object.assign({}, baseConfig.module, {
     preLoaders: [
       // Eslint loader
       { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'eslint-loader'},
     ],
-    loaders: [
-      { test: /\.css$/, loader: 'file?name=[name].[ext]' },
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        loaders: [
-          'react-hot',
-          'babel']
-      },
-    ],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './index.html',
-      inject: true
-    })
-  ],
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
-}
+  }),
+})
