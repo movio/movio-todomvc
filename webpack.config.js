@@ -1,10 +1,10 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   context: __dirname + '/src',
-  entry: {
-    jsx: './index.js',
-    css: './main.css',
-    html: './index.html',
-  },
+  entry: [
+    'babel-polyfill',
+    './index.js'
+  ],
   debug: true,
   devtool: 'source-map',
 
@@ -18,24 +18,23 @@ module.exports = {
       { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'eslint-loader'},
     ],
     loaders: [
-      { test: /\.html$/, loader: 'file?name=[name].[ext]' },
       { test: /\.css$/, loader: 'file?name=[name].[ext]' },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: [
           'react-hot',
-          'babel?presets[]=movio&cacheDirectory=true']
+          'babel']
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      inject: true
+    })
+  ],
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
-  // standard: {
-  //   parser: 'babel-eslint'
-  // }
-// eslint: {
-//   configFile: './.eslintrc'
-// },
 }

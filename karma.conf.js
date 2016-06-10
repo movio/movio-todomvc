@@ -1,8 +1,5 @@
 var path = require('path');
 var webpackConfig = require('./webpack.config.js');
-var entry = path.resolve(webpackConfig.context, webpackConfig.entry.jsx);
-var preprocessors = {};
-preprocessors[entry] = ['webpack'];
 
 module.exports = function(config) {
   config.set({
@@ -22,7 +19,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     // files: [entry],
-    files: ['**/*.test.js'],
+    files: ['**/*.spec.js'],
     webpack: webpackConfig,
 
 
@@ -35,7 +32,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     // preprocessors: preprocessors,
     preprocessors: {
-      '**/*.test.js': ['webpack']
+      '**/*.spec.js': ['webpack', 'sourcemap']
     },
 
 
@@ -65,14 +62,15 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity,
+    concurrency: 10,
 
     plugins: [
-      require('karma-webpack'),
+      'karma-webpack',
       'karma-chai',
       'karma-mocha',
       'karma-phantomjs-launcher',
-      'karma-phantomjs-shim'
+      'karma-phantomjs-shim',
+      'karma-sourcemap-loader'
     ]
   })
 }
