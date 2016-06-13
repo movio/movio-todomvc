@@ -1,4 +1,4 @@
 const baseConfig = require('./base.webpack.config');
 module.exports = Object.assign({}, baseConfig, {
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-source-map',
 });
