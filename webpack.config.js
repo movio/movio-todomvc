@@ -1,4 +1,3 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseConfig = require('./base.webpack.config');
 module.exports = Object.assign({}, baseConfig, {
   devtool: 'source-map',
