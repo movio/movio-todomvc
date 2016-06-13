@@ -1,9 +1,12 @@
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
+import dirtyChai from 'dirty-chai';
 import { stub, test } from 'sinon';
 import { OrderedMap } from 'immutable';
 import { reducers } from './reducer';
 import { actionTypes as t } from './constants';
 import { actionTypes } from '../generated/todo/';
+
+chai.use(dirtyChai);
 
 describe('Test todo reducer', () => {
   let todos;
@@ -35,7 +38,7 @@ describe('Test todo reducer', () => {
       expect(todos(initState, action).size).to.equal(initState.size + 1);
     }));
     it('should have a uuid associated with it', test(() => {
-      expect(todos(initState, action)).to.not.be.undefined;
+      expect(todos(initState, action)).to.not.be.undefined();
     }));
     it('should add a todo with the correct text', () => {
       expect(todos(initState, action).get(1).text).to.equal('some text');
@@ -54,7 +57,7 @@ describe('Test todo reducer', () => {
         text: 'Delete Me',
         completed: false,
       });
-      expect(todos(state, action).get(1)).to.be.undefined;
+      expect(todos(state, action).get(1)).to.be.undefined();
     });
   });
   describe('ActionType: complete', () => {
@@ -105,7 +108,7 @@ describe('Test todo reducer', () => {
       const state = new OrderedMap().set(1, todoOne).set(2, todoTwo);
       const newState = todos(state, action);
       expect(newState.get(1)).to.equal(todoOne);
-      expect(newState.get(2)).to.be.undefined;
+      expect(newState.get(2)).to.be.undefined();
     });
   });
   describe('ActionType: getTodos_success', () => {
