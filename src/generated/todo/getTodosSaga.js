@@ -57,7 +57,7 @@ function* saga(action) {
   const { aPathParam, aQueryParam } = action.payload;
   try {
     yield put(actions.getTodos_doing());
-    const { response } = yield call(api, aPathParam, aQueryParam);
+    const response = yield call(api, aPathParam, aQueryParam);
     yield put(actions.getTodos_success(response));
   } catch (error) {
     yield put(actions.getTodos_failure(error));
